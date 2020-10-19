@@ -31,10 +31,13 @@ export const HeaderWrapper = styled.div`
 
 export const Heading = styled.h1`
 	font-size: ${(props) => props.fontSize};
-	color: white;
+	color: ${(props) => props.color || "white" };
 	text-align: center;
 	margin: 0 auto;
 	z-index: 1000;
+	@media (max-width: 768px) {
+		font-size: 1rem;
+	}
 `;
 
 export const BadgeWrapper = styled.div`
@@ -48,14 +51,19 @@ export const BadgeWrapper = styled.div`
 	@media (max-width: 768px) {
 		width: 100vw;
 		height: 30vh;
-
 	}
 `;
 
 export const ButtonWrapper = styled.div`
+	background: yellow;
+	width: 100vw;
+	height: 20vh;
+	position: absolute;
+	bottom: 5vh;
 	display: flex;
-	justify-content: center;
+	justify-content: space-around;
 	align-items: center;
+	flex-direction: column;
 `;
 
 export const ImageWrapper = styled.img`
@@ -67,5 +75,20 @@ export const ImageWrapper = styled.img`
 	@media (max-width: 768px) {
 		height: 20vh;
 		width: 20vh;
+	}
+`;
+
+export const Button = styled.button`
+	border-radius: 20px;
+	height: 6vh;
+	width: 20vw;
+	background: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: blue;
+	@media (max-width: 768px) {
+		height: 6vh;
+		width: 30vw;
 	}
 `;
