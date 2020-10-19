@@ -28,7 +28,7 @@ const LandingPage = () => {
 					Queen Al Falcone is now in hiding. But if King Shan can find her before the years are up, she will
 					be exiled for another 15 years…
 				</Heading>
-				<Button onClick={changePageOnClick}>Find FALCONE</Button>
+				<Button onClick={changePageOnClick}>Find Falcone</Button>
 			</ButtonWrapper>
 		</Wrapper>
 	);

@@ -33,6 +33,7 @@ export const Heading = styled.h1`
 	font-size: ${(props) => props.fontSize};
 	color: ${(props) => props.color || "white" };
 	text-align: center;
+	font-family: Nasalisation;
 	margin: 0 auto;
 	z-index: 1000;
 	@media (max-width: 768px) {
@@ -83,7 +84,9 @@ export const Button = styled.button`
 	height: 6vh;
 	width: 20vw;
 	background: white;
+	font-size: 1.2rem;
 	display: flex;
+	font-family: Nasalisation;
 	justify-content: center;
 	align-items: center;
 	color: blue;
