@@ -9,6 +9,7 @@ export const Wrapper = styled.div`
 	overflow: hidden;
 	display: flex;
 	justify-content: center;
+	flex-direction: ${props=>props.flexDirection || "row"};
 	@media (max-width: 768px) {
 		flex-direction: column;
 		height: 80vh;
@@ -31,7 +32,7 @@ export const HeaderWrapper = styled.div`
 
 export const Heading = styled.h1`
 	font-size: ${(props) => props.fontSize};
-	color: ${(props) => props.color || "white" };
+	color: ${(props) => props.color || 'white'};
 	text-align: center;
 	font-family: Nasalisation;
 	margin: 0 auto;
@@ -69,8 +70,8 @@ export const ButtonWrapper = styled.div`
 
 export const ImageWrapper = styled.img`
 	border-radius: 50%;
-	height: 30vh;
-	width: 30vh;
+	height: ${props=>props.height || "30vh"};
+	width: ${props=>props.height || "30vh"};
 	object-fit: cover;
 	border: 5px solid black;
 	@media (max-width: 768px) {
@@ -90,10 +91,50 @@ export const Button = styled.button`
 	justify-content: center;
 	align-items: center;
 	color: blue;
-	outline:none;
+	outline: none;
 	cursor: pointer;
 	@media (max-width: 768px) {
 		height: 6vh;
 		width: 30vw;
 	}
 `;
+
+export const PlanetWrapper = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: blue;
+	width: 100vw;
+	height: 60vh;
+	@media (max-width: 768px) {
+		width: 100vw;
+		height: 30vh;
+	}
+`;
+
+export const SelectedPlanetWrapper = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: pink;
+	width: 100vw;
+	height: 30vh;
+	@media (max-width: 768px) {
+		width: 100vw;
+		height: 30vh;
+	}
+`;
+
+export const SelectedPlanet = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex:1;
+	height:30vh;
+	border: 2px solid black;
+	@media (max-width: 768px) {
+		width: 100vw;
+		height: 30vh;
+	}
+`;
+

@@ -10,9 +10,9 @@ const LandingPage = () => {
 
 	if (apiToken.length === 0) {
 		usefetchToken(setApiToken);
-    }
-    
-    const history=useHistory();
+	}
+
+	const history = useHistory();
 
 	const changePageOnClick = () => history.push('/selectplanets');
 	return (
