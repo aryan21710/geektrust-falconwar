@@ -23,7 +23,7 @@ export const HeaderWrapper = styled.div`
 	background: black;
 	margin: 0;
 	padding: 0;
-	position: absolute;
+	position: fixed;
 	top: ${(props) => props.topPos || '0vh'};
 	display: flex;
 	justify-content: center;
@@ -100,7 +100,24 @@ export const Button = styled.button`
 	}
 `;
 
-export const PlanetWrapper = styled.div`
+export const SelectedPlanetWrapper = styled.div`
+	width: 100vw;
+	height: 100vh;
+	background: pink;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	@media (max-width: 768px) {
+		flex-direction: column;
+		height: 140vh;
+		overflow-y: scroll
+	}
+`;
+
+export const SolarSystemWrapper = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -109,11 +126,12 @@ export const PlanetWrapper = styled.div`
 	height: 60vh;
 	@media (max-width: 768px) {
 		width: 100vw;
-		height: 30vh;
+		height: 60vh;
+
 	}
 `;
 
-export const SelectedPlanetWrapper = styled.div`
+export const PlanetWrapper = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -122,7 +140,8 @@ export const SelectedPlanetWrapper = styled.div`
 	height: 30vh;
 	@media (max-width: 768px) {
 		width: 100vw;
-		height: 30vh;
+		height: 80vh;
+		flex-direction: column;
 	}
 `;
 
@@ -137,7 +156,7 @@ export const SelectedPlanet = styled.div`
 	overflow: hidden;
 	@media (max-width: 768px) {
 		width: 100vw;
-		height: 30vh;
+		height: 55vh;
 	}
 `;
 
@@ -149,8 +168,8 @@ export const SelectedPlanetImg = styled(animated.img)`
 	object-fit: cover;
 	border: 5px solid black;
 	@media (max-width: 768px) {
-		height: 20vh;
-		width: 20vh;
+		height: 10vh;
+		width: 10vh;
 	}
 `;
 

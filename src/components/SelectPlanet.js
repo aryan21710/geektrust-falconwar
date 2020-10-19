@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import {
-	Wrapper,
-	PlanetWrapper,
 	SelectedPlanetWrapper,
+	SolarSystemWrapper,
+	PlanetWrapper,
 	SelectedPlanet,
 	SelectedPlanetImg,
 	Button,
@@ -19,25 +19,25 @@ const SelectPlanet = () => {
 	const animateSelectedPlanet = () => setIsClicked(!isClicked);
 
 	return (
-		<Wrapper flexDirection="column">
-			<PlanetWrapper>
+		<SelectedPlanetWrapper>
+			<SolarSystemWrapper>
 				<Button onClick={animateSelectedPlanet}>Select Planet</Button>
+			</SolarSystemWrapper>
+			<PlanetWrapper>
+				<SelectedPlanet>
+					<SelectedPlanetImg style={props} />
+				</SelectedPlanet>
+				<SelectedPlanet>
+					<SelectedPlanetImg style={props} />
+				</SelectedPlanet>
+				<SelectedPlanet>
+					<SelectedPlanetImg style={props} />
+				</SelectedPlanet>
+				<SelectedPlanet>
+					<SelectedPlanetImg style={props} />
+				</SelectedPlanet>
 			</PlanetWrapper>
-			<SelectedPlanetWrapper>
-				<SelectedPlanet>
-					<SelectedPlanetImg style={props} />
-				</SelectedPlanet>
-				<SelectedPlanet>
-					<SelectedPlanetImg style={props} />
-				</SelectedPlanet>
-				<SelectedPlanet>
-					<SelectedPlanetImg style={props} />
-				</SelectedPlanet>
-				<SelectedPlanet>
-					<SelectedPlanetImg style={props} />
-				</SelectedPlanet>
-			</SelectedPlanetWrapper>
-		</Wrapper>
+		</SelectedPlanetWrapper>
 	);
 };
 
