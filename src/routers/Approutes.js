@@ -5,7 +5,9 @@ import PrivateRoute from './PrivateRoute';
 import ErrorBoundary from '../components/common/ErrorBoundaryComp';
 
 // *** LAZY LOAD ALL COMPONENTS STARTS ***
-const LandingPage  = lazy(() => import('../components/LandingPage'));
+const LandingPage = lazy(() => import('../components/LandingPage'));
+const Header = lazy(() => import('../components/common/Header'));
+const Footer = lazy(() => import('../components/common/Footer'));
 
 class DebugRouter extends Router {
 	constructor(props) {
@@ -26,7 +28,9 @@ const Approutes = () => {
 		<DebugRouter>
 			<Switch>
 				<Suspense fallback={<div>Loading</div>}>
-					<Route path={`/`} exact={true} strict component={LandingPage} />
+					<Header />
+                    <Route path={`/`} exact={true} strict component={LandingPage} />
+                    <Footer/>
 				</Suspense>
 			</Switch>
 		</DebugRouter>

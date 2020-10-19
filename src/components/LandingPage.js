@@ -1,17 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { Wrapper, Heading } from './common/StyledComponent';
+import { Wrapper, BadgeWrapper, ImageWrapper } from './common/StyledComponent';
 import { usefetchToken } from '../customHooks/useFetchToken';
+import apple from '../public/images/apple_raw.png';
+import google from '../public/images/googleIcon.png';
 
 const LandingPage = () => {
 	const [apiToken, setApiToken] = useState('');
 
 	if (apiToken.length === 0) {
-		usefetchToken(setApiToken)
+		usefetchToken(setApiToken);
 	}
 
 	return (
 		<Wrapper>
-			<Heading fontSize="2rem">{apiToken}</Heading>
+			<BadgeWrapper>
+				<ImageWrapper src={apple}/>
+			</BadgeWrapper>
+			<BadgeWrapper>
+				<ImageWrapper src={google}/>
+			</BadgeWrapper>
 		</Wrapper>
 	);
 };
