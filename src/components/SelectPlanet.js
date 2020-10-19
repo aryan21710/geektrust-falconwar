@@ -1,22 +1,40 @@
-import React from 'react';
-import { Wrapper, PlanetWrapper, SelectedPlanetWrapper, SelectedPlanet, ImageWrapper } from './common/StyledComponent';
+import React, { useState, useEffect } from 'react';
+import {
+	Wrapper,
+	PlanetWrapper,
+	SelectedPlanetWrapper,
+	SelectedPlanet,
+	SelectedPlanetImg,
+	Button,
+} from './common/StyledComponent';
+import { useSpring, config } from 'react-spring';
 
 const SelectPlanet = () => {
+	const [isClicked, setIsClicked] = useState(false);
+	const props = useSpring({
+		transform: isClicked ? 'translateX(0vh)' : 'translateX(-50vh)',
+		config: config.slow,
+	});
+
+	const animateSelectedPlanet = () => setIsClicked(!isClicked);
+
 	return (
 		<Wrapper flexDirection="column">
-			<PlanetWrapper></PlanetWrapper>
+			<PlanetWrapper>
+				<Button onClick={animateSelectedPlanet}>Select Planet</Button>
+			</PlanetWrapper>
 			<SelectedPlanetWrapper>
 				<SelectedPlanet>
-					<ImageWrapper height="15vh" />
+					<SelectedPlanetImg style={props} />
 				</SelectedPlanet>
 				<SelectedPlanet>
-					<ImageWrapper height="15vh" />
+					<SelectedPlanetImg style={props} />
 				</SelectedPlanet>
 				<SelectedPlanet>
-					<ImageWrapper height="15vh" />
+					<SelectedPlanetImg style={props} />
 				</SelectedPlanet>
 				<SelectedPlanet>
-					<ImageWrapper height="15vh" />
+					<SelectedPlanetImg style={props} />
 				</SelectedPlanet>
 			</SelectedPlanetWrapper>
 		</Wrapper>

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { animated } from 'react-spring';
 
 export const Wrapper = styled.div`
 	width: 100vw;
@@ -131,10 +132,25 @@ export const SelectedPlanet = styled.div`
 	align-items: center;
 	flex:1;
 	height:30vh;
+	position: relative;
 	border: 2px solid black;
+	overflow: hidden;
 	@media (max-width: 768px) {
 		width: 100vw;
 		height: 30vh;
+	}
+`;
+
+export const SelectedPlanetImg = styled(animated.img)`
+	border-radius: 50%;
+	height: 20vh;
+	position: absolute;
+	width: 20vh;
+	object-fit: cover;
+	border: 5px solid black;
+	@media (max-width: 768px) {
+		height: 20vh;
+		width: 20vh;
 	}
 `;
 
