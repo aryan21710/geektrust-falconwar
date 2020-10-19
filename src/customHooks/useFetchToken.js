@@ -1,24 +1,19 @@
 import axios from 'axios';
-import { TokenUrl,delMeLater } from '../common/myenv';
-import { dataHeaders } from '../common/axiosHeader';
+import { TokenUrl } from '../common/myenv';
 
-export const useFetchToken = async (apiToken, setApiToken) => {
-	const fetchToken = async () => {
-		try {
-			const response = await axios.post(
-				TokenUrl,
-				{},
-				{
-					headers: dataHeaders,
-				}
-			);
-			const { token } = response;
-			setApiToken(token);
-			console.log(`axios response ${JSON.stringify(response)}`);
-		} catch (err) {
-			console.log(`err ${err}`);
-		}
-	};
-
-	fetchToken();
+export const usefetchToken = async (setApiToken) => {
+	const response=await axios(TokenUrl, {
+	   method: 'POST',
+	   mode: 'cors',
+	   cache: 'no-cache',
+	   credentials: 'same-origin',
+	   body: {},
+	   redirect: 'follow',
+	   referrerPolicy: 'no-referrer',
+	   headers: {
+		   Accept: 'application/json',
+	   },
+   })
+   console.log(`axios response ${JSON.stringify(response)}`)
+   setApiToken(response.data.token)
 };
