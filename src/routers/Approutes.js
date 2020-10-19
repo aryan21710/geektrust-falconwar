@@ -8,6 +8,9 @@ import ErrorBoundary from '../components/common/ErrorBoundaryComp';
 const LandingPage = lazy(() => import('../components/LandingPage'));
 const Header = lazy(() => import('../components/common/Header'));
 const Footer = lazy(() => import('../components/common/Footer'));
+const SelectPlanet = lazy(() => import('../components/SelectPlanet'));
+const SelectBot = lazy(() => import('../components/SelectBot'));
+
 
 class DebugRouter extends Router {
 	constructor(props) {
@@ -29,8 +32,10 @@ const Approutes = () => {
 			<Switch>
 				<Suspense fallback={<div>Loading</div>}>
 					<Header />
-                    <Route path={`/`} exact={true} strict component={LandingPage} />
-                    <Footer/>
+					<Route path={`/`} exact={true} strict component={LandingPage} />
+                    <Route path={`/selectplanets`} exact={true} strict component={SelectPlanet} />
+                    <Route path={`/selectbots`} exact={true} strict component={SelectBot} />
+					<Footer />
 				</Suspense>
 			</Switch>
 		</DebugRouter>

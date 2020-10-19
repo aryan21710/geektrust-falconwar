@@ -87,6 +87,8 @@ export const Button = styled.button`
 	justify-content: center;
 	align-items: center;
 	color: blue;
+	outline:none;
+	cursor: pointer;
 	@media (max-width: 768px) {
 		height: 6vh;
 		width: 30vw;
