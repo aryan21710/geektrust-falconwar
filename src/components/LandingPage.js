@@ -1,15 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Wrapper, BadgeWrapper, ImageWrapper, ButtonWrapper, Heading, Button } from './common/StyledComponent';
 import { usefetchToken } from '../customHooks/useFetchToken';
 import apple from '../public/images/apple_raw.png';
 import google from '../public/images/googleIcon.png';
 import { useHistory } from 'react-router';
+import { PlanetDetailsContext } from '../context/appContext';
 
 const LandingPage = () => {
-	const [apiToken, setApiToken] = useState('');
+	const { planetCfg, setPlanetCfg } = useContext(PlanetDetailsContext);
 
-	if (apiToken.length === 0) {
-		usefetchToken(setApiToken);
+	const { token } = planetCfg;
+
+	if (token.length === 0) {
+		usefetchToken(planetCfg, setPlanetCfg);
 	}
 
 	const history = useHistory();

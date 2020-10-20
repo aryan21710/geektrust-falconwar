@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { TokenUrl } from '../common/myenv';
 
-export const usefetchToken = async (setApiToken) => {
+export const usefetchToken = async (planetCfg,setPlanetCfg) => {
 	const response=await axios(TokenUrl, {
 	   method: 'POST',
 	   mode: 'cors',
@@ -15,5 +15,7 @@ export const usefetchToken = async (setApiToken) => {
 	   },
    })
    console.log(`axios response ${JSON.stringify(response)}`)
-   setApiToken(response.data.token)
+   setPlanetCfg({...planetCfg,token: response.data.token})
+
+   
 };
