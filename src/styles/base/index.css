@@ -83,3 +83,10 @@ code {
 	height: 20px;
 	opacity: 0.3;
 }
+.minijet {
+  width: 50px;
+  height: 20px;
+  object-fit: cover;
+  position: absolute;
+  left: 0vh;
+}

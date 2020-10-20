@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
 	justify-content: center;
 	opacity: 1;
 	z-index: 2;
-	flex-direction: ${props=>props.flexDirection || "row"};
+	flex-direction: ${(props) => props.flexDirection || 'row'};
 	@media (max-width: 768px) {
 		flex-direction: column;
 		height: 80vh;
@@ -32,14 +32,13 @@ export const HeaderWrapper = styled.div`
 `;
 
 export const Heading = styled.h1`
-	font-size: ${(props) => props.fontSize || "1.8rem"};
+	font-size: ${(props) => props.fontSize || '1.8rem'};
 	color: ${(props) => props.color || 'white'};
 	text-align: center;
-	font-family: ${props=>props.fontFamily || "Nasalisation"};
+	font-family: ${(props) => props.fontFamily || 'Nasalisation'};
 	margin: 0 auto;
 	z-index: 1000;
 	font-weight: 100;
-
 	@media (max-width: 768px) {
 		font-size: 1rem;
 	}
@@ -49,7 +48,7 @@ export const BadgeWrapper = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	flex-direction: ${props=>props.flexDirection || "row"};
+	flex-direction: ${(props) => props.flexDirection || 'row'};
 	height: 75vh;
 	flex: 1;
 	z-index: 2;
@@ -68,13 +67,12 @@ export const ButtonWrapper = styled.div`
 	justify-content: space-around;
 	align-items: center;
 	flex-direction: column;
-
 `;
 
 export const ImageWrapper = styled.img`
 	border-radius: 50%;
-	height: ${props=>props.height || "30vh"};
-	width: ${props=>props.height || "30vh"};
+	height: ${(props) => props.height || '30vh'};
+	width: ${(props) => props.height || '30vh'};
 	object-fit: cover;
 	@media (max-width: 768px) {
 		height: 20vh;
@@ -82,10 +80,9 @@ export const ImageWrapper = styled.img`
 	}
 `;
 
-export const Button = styled.button`
+export const Button = styled.div`
 	border-radius: 50px;
-	height: 6vh;
-	width: 15vw;
+	padding: 0vh 2vw;
 	font-size: 1.5rem;
 	font-weight: 700;
 	display: flex;
@@ -95,12 +92,29 @@ export const Button = styled.button`
 	color: white;
 	outline: none;
 	cursor: pointer;
+	position: relative;
 	border: 0px solid transparent;
-	background: linear-gradient(to bottom, #FFC810, #B43E00);
+	overflow: hidden;
+	background: linear-gradient(to bottom, #ffc810, #b43e00);
 	@media (max-width: 768px) {
+		padding: 0vh 2vw;
+		font-size: 0.4rem;
+		font-weight: 500;
 		height: 6vh;
-		width: 30vw;
 	}
+`;
+
+export const ButtonText = styled(animated.p)`
+	font-size: 1.2rem;
+	text-align: center;
+`;
+
+export const AnimatedMiniJet = styled(animated.img)`
+	width: 50px;
+	height: 20px;
+	object-fit: cover;
+	position: absolute;
+	left: 0vh;
 `;
 
 export const SelectedPlanetWrapper = styled.div`
@@ -115,7 +129,7 @@ export const SelectedPlanetWrapper = styled.div`
 	@media (max-width: 768px) {
 		flex-direction: column;
 		height: 140vh;
-		overflow-y: scroll
+		overflow-y: scroll;
 	}
 `;
 
@@ -128,7 +142,6 @@ export const SolarSystemWrapper = styled.div`
 	@media (max-width: 768px) {
 		width: 100vw;
 		height: 60vh;
-
 	}
 `;
 
@@ -149,8 +162,8 @@ export const SelectedPlanet = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	flex:1;
-	height:30vh;
+	flex: 1;
+	height: 30vh;
 	position: relative;
 	border: 2px solid black;
 	overflow: hidden;
@@ -172,4 +185,3 @@ export const SelectedPlanetImg = styled(animated.img)`
 		width: 10vh;
 	}
 `;
-

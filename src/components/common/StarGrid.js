@@ -6,9 +6,12 @@ export const StarGrid = () => {
 	const classNameForStarGrid = window.innerWidth > 768 ? 'gridForBigScreen' : 'gridForSmallScreen';
 
 	useEffect(() => {
-		setTimeout(() => {
+		const timeout = setTimeout(() => {
 			setSelectRandomStar(Math.floor(Math.random() * 100 + 1));
 		}, 500);
+		return () => {
+			clearTimeout(timeout);
+		};
 	}, [selectRandomStar]);
 	return (
 		<React.Fragment>
