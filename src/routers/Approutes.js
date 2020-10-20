@@ -29,6 +29,7 @@ class DebugRouter extends Router {
 const Approutes = () => {
 	const [planetCfg, setPlanetCfg] = useState({
 		token: "",
+		apiError: "",
 	});
 
 	const {token}=planetCfg;

@@ -9,9 +9,9 @@ import { PlanetDetailsContext } from '../context/appContext';
 const LandingPage = () => {
 	const { planetCfg, setPlanetCfg } = useContext(PlanetDetailsContext);
 
-	const { token } = planetCfg;
+	const { token,apiError } = planetCfg;
 
-	if (token.length === 0) {
+	if (token.length === 0 && apiError.length===0) {
 		usefetchToken(planetCfg, setPlanetCfg);
 	}
 
