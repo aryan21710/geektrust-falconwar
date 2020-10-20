@@ -26,7 +26,6 @@ code {
 	align-items: center;
 	flex-wrap: wrap;
 	z-index: 0;
-	opacity: 0.3;
 	position: absolute;
 }
 
@@ -38,23 +37,49 @@ code {
 
 .gridForBigScreen {
 	width: 10vw;
-  height: 10vh;
+	height: 10vh;
+	z-index: 100;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .gridForSmallScreen {
-  width: 20vw;
-  height: 10vh;
+	width: 20vw;
+	height: 10vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.animateStar {
+	animation: changeOpacityAndRotate 0.1s 5 forwards;
 }
 
-.star0deg, .star40deg {
-  background-image: url('../../public/images/star 1.png');
-  background-size: 20px 20px;
+@keyframes changeOpacityAndRotate {
+	25% {
+		opacity: 0;
+		transform: scaleX(1) rotateX(0deg);
+	}
+	50% {
+		opacity: 1;
+		transform: scaleX(3) rotateX(60deg);
+	}
+	75% {
+		opacity: 0.2;
+		transform: scaleX(0.5) rotateX(60deg);
+	}
+	100% {
+		opacity: 0.2;
+		transform: scaleX(1) rotateX(0deg);
+	}
+}
+
+.star {
+	background-image: url('../../public/images/star 1.png');
 	background-repeat: no-repeat;
 	background-position: center;
-  transform: rotate(0deg);
-}
-
-
-.star40deg {
-  transform: rotate(40deg);
+	transform: rotate(40deg);
+	width: 20px;
+	height: 20px;
+	opacity: 0.3;
 }

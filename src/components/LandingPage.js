@@ -32,7 +32,7 @@ const LandingPage = () => {
 					</Heading>
 				</BadgeWrapper>
 				<ButtonWrapper>
-					<Heading color="white" fontSize="1.4rem" fontFamily="Avenir">
+					<Heading color="white" fontSize="1.2rem" fontFamily="Avenir">
 						Queen Al Falcone is now in hiding. But if King Shan can find her before the years are up, she
 						will be exiled for another 15 years…
 					</Heading>

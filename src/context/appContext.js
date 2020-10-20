@@ -1,7 +1,5 @@
-import React from 'react'
+import React from 'react';
 
-const PlanetDetailsContext = React.createContext()
+const PlanetDetailsContext = React.createContext();
 
-
-export {PlanetDetailsContext}
-
+export { PlanetDetailsContext };

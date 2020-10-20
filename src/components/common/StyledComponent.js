@@ -38,6 +38,8 @@ export const Heading = styled.h1`
 	font-family: ${props=>props.fontFamily || "Nasalisation"};
 	margin: 0 auto;
 	z-index: 1000;
+	font-weight: 100;
+
 	@media (max-width: 768px) {
 		font-size: 1rem;
 	}
@@ -74,7 +76,6 @@ export const ImageWrapper = styled.img`
 	height: ${props=>props.height || "30vh"};
 	width: ${props=>props.height || "30vh"};
 	object-fit: cover;
-	border: 5px solid black;
 	@media (max-width: 768px) {
 		height: 20vh;
 		width: 20vh;
@@ -82,19 +83,20 @@ export const ImageWrapper = styled.img`
 `;
 
 export const Button = styled.button`
-	border-radius: 20px;
+	border-radius: 50px;
 	height: 6vh;
-	width: 20vw;
-	font-size: 1.2rem;
+	width: 15vw;
+	font-size: 1.5rem;
+	font-weight: 700;
 	display: flex;
-	font-family: Nasalisation;
+	font-family: Avenir;
 	justify-content: center;
 	align-items: center;
-	color: blue;
+	color: white;
 	outline: none;
 	cursor: pointer;
 	border: 0px solid transparent;
-	background: linear-gradient(-34deg, #FFC810, #E60000);
+	background: linear-gradient(to bottom, #FFC810, #B43E00);
 	@media (max-width: 768px) {
 		height: 6vh;
 		width: 30vw;
