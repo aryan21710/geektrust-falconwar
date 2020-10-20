@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Wrapper, BadgeWrapper, ImageWrapper, ButtonWrapper, Heading, Button } from './common/StyledComponent';
-import { usefetchToken } from '../customHooks/useFetchToken';
+import { useFetchDataFromBackend } from '../customHooks/useFetchDataFromBackend';
 import apple from '../public/images/apple_raw.png';
 import google from '../public/images/googleIcon.png';
 import { useHistory } from 'react-router';
@@ -8,13 +8,7 @@ import { PlanetDetailsContext } from '../context/appContext';
 
 const LandingPage = () => {
 	const { planetCfg, setPlanetCfg } = useContext(PlanetDetailsContext);
-
-	const { token, apiError, planetData, vehicleData } = planetCfg;
-
-	if (token.length === 0 && apiError.length === 0 && planetData.length === 0 && vehicleData.length === 0) {
-		usefetchToken(planetCfg, setPlanetCfg);
-	}
-
+	useFetchDataFromBackend(planetCfg, setPlanetCfg);
 	const history = useHistory();
 
 	const changePageOnClick = () => history.push('/selectplanets');
