@@ -4,12 +4,13 @@ import { animated } from 'react-spring';
 export const Wrapper = styled.div`
 	width: 100vw;
 	height: 100vh;
-	background: pink;
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
 	display: flex;
 	justify-content: center;
+	opacity: 1;
+	z-index: 2;
 	flex-direction: ${props=>props.flexDirection || "row"};
 	@media (max-width: 768px) {
 		flex-direction: column;
@@ -20,7 +21,6 @@ export const Wrapper = styled.div`
 export const HeaderWrapper = styled.div`
 	width: 100vw;
 	height: ${(props) => props.height || '10vh'};
-	background: black;
 	margin: 0;
 	padding: 0;
 	position: fixed;
@@ -32,10 +32,10 @@ export const HeaderWrapper = styled.div`
 `;
 
 export const Heading = styled.h1`
-	font-size: ${(props) => props.fontSize};
+	font-size: ${(props) => props.fontSize || "1.8rem"};
 	color: ${(props) => props.color || 'white'};
 	text-align: center;
-	font-family: Nasalisation;
+	font-family: ${props=>props.fontFamily || "Nasalisation"};
 	margin: 0 auto;
 	z-index: 1000;
 	@media (max-width: 768px) {
@@ -47,10 +47,10 @@ export const BadgeWrapper = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background: blue;
-	width: 50vw;
+	flex-direction: ${props=>props.flexDirection || "row"};
 	height: 75vh;
 	flex: 1;
+	z-index: 2;
 	@media (max-width: 768px) {
 		width: 100vw;
 		height: 30vh;
@@ -58,7 +58,6 @@ export const BadgeWrapper = styled.div`
 `;
 
 export const ButtonWrapper = styled.div`
-	background: yellow;
 	width: 100vw;
 	height: 20vh;
 	position: absolute;
@@ -67,6 +66,7 @@ export const ButtonWrapper = styled.div`
 	justify-content: space-around;
 	align-items: center;
 	flex-direction: column;
+
 `;
 
 export const ImageWrapper = styled.img`
@@ -85,7 +85,6 @@ export const Button = styled.button`
 	border-radius: 20px;
 	height: 6vh;
 	width: 20vw;
-	background: white;
 	font-size: 1.2rem;
 	display: flex;
 	font-family: Nasalisation;
@@ -94,6 +93,8 @@ export const Button = styled.button`
 	color: blue;
 	outline: none;
 	cursor: pointer;
+	border: 0px solid transparent;
+	background: linear-gradient(-34deg, #FFC810, #E60000);
 	@media (max-width: 768px) {
 		height: 6vh;
 		width: 30vw;
@@ -103,7 +104,6 @@ export const Button = styled.button`
 export const SelectedPlanetWrapper = styled.div`
 	width: 100vw;
 	height: 100vh;
-	background: pink;
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
@@ -121,7 +121,6 @@ export const SolarSystemWrapper = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background: blue;
 	width: 100vw;
 	height: 60vh;
 	@media (max-width: 768px) {
@@ -135,7 +134,6 @@ export const PlanetWrapper = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background: pink;
 	width: 100vw;
 	height: 30vh;
 	@media (max-width: 768px) {

@@ -4,7 +4,7 @@ import { Heading, HeaderWrapper } from './StyledComponent';
 const Header = () => {
 	return (
 		<HeaderWrapper>
-			<Heading>WELCOME TO TARA B</Heading>
+			<Heading>WELCOME TO THE BATTLE OF TARA B</Heading>
 		</HeaderWrapper>
 	);
 };

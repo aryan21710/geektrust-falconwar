@@ -51,7 +51,11 @@ export const useFetchDataFromBackend = async (planetCfg, setPlanetCfg) => {
 			}
 		} catch (err) {
 			console.log(`axios error ${JSON.stringify(err)}`);
-			setPlanetCfg({ ...planetCfg, apiError: err.response.data });
+			if (err?.response?.data) {
+				setPlanetCfg({ ...planetCfg, apiError: err.response.data });
+			} else {
+				setPlanetCfg({ ...planetCfg, apiError: err.message });
+			}
 		}
 	}
 };
