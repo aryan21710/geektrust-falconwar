@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { animated } from 'react-spring';
+import solarSystem from '../../public/images/sunWithOrbit.png';
 
 export const Wrapper = styled.div`
 	width: 100vw;
@@ -125,6 +126,7 @@ export const SelectedPlanetWrapper = styled.div`
 	overflow: hidden;
 	display: flex;
 	justify-content: center;
+	align-items: center;
 	flex-direction: column;
 	@media (max-width: 768px) {
 		flex-direction: column;
@@ -135,13 +137,42 @@ export const SelectedPlanetWrapper = styled.div`
 
 export const SolarSystemWrapper = styled.div`
 	display: flex;
-	justify-content: center;
+	justify-content: space-around;
 	align-items: center;
-	width: 100vw;
-	height: 60vh;
+	flex-direction: column;
+	width: 80vw;
+	height: 50vh;
+	z-index: 100;
 	@media (max-width: 768px) {
 		width: 100vw;
-		height: 60vh;
+		height: 40vh;
+	}
+`;
+
+export const SolarSystemImage = styled(animated.div)`
+	cursor: pointer;
+	width: 60vw;
+	height: 30vh;
+	background-image: url(${solarSystem});
+	background-position: center;
+	background-repeat: no-repeat;
+	position: relative;
+	z-index: 100;
+	@media (max-width: 768px) {
+		width: 90vw;
+	}
+`;
+
+export const Planet = styled(animated.img)`
+	width: ${(props) => props.width || '4vw'};
+	object-fit: cover;
+	cursor: pointer;
+	position: absolute;
+	top: ${(props) => props.topPos || '10vh'};
+	left: ${(props) => props.leftPos || '0vw'};
+	z-index: 100;
+	@media (max-width: 768px) {
+		width: 90vw;
 	}
 `;
 
@@ -150,7 +181,7 @@ export const PlanetWrapper = styled.div`
 	justify-content: center;
 	align-items: center;
 	width: 100vw;
-	height: 30vh;
+	height: 35vh;
 	@media (max-width: 768px) {
 		width: 100vw;
 		height: 80vh;
@@ -163,10 +194,10 @@ export const SelectedPlanet = styled.div`
 	justify-content: center;
 	align-items: center;
 	flex: 1;
-	height: 30vh;
+	height: 25vh;
 	position: relative;
-	border: 2px solid black;
 	overflow: hidden;
+	border: 2px solid white;
 	@media (max-width: 768px) {
 		width: 100vw;
 		height: 55vh;
