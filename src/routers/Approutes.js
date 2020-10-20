@@ -30,6 +30,8 @@ const Approutes = () => {
 	const [planetCfg, setPlanetCfg] = useState({
 		token: "",
 		apiError: "",
+		planetData: [],
+		vehicleData:[]
 	});
 
 	const {token}=planetCfg;

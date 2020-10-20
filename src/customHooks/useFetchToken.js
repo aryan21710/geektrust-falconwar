@@ -1,9 +1,33 @@
 import axios from 'axios';
-import { TokenUrl } from '../common/myenv';
+import { TokenUrl, PlanetUrl,VehicleUrl } from '../common/myenv';
 
 export const usefetchToken = async (planetCfg, setPlanetCfg) => {
 	try {
-		const response = await axios(TokenUrl, {
+		const planetApiResponse = await axios(PlanetUrl, {
+			method: 'GET',
+			mode: 'cors',
+			cache: 'no-cache',
+			credentials: 'same-origin',
+			redirect: 'follow',
+			referrerPolicy: 'no-referrer',
+		});
+
+		const planetData = planetApiResponse?.data;
+		console.log(`axios planetApiResponse ${JSON.stringify(planetData)}`);
+
+		const vehicleApiResponse = await axios(VehicleUrl, {
+			method: 'GET',
+			mode: 'cors',
+			cache: 'no-cache',
+			credentials: 'same-origin',
+			redirect: 'follow',
+			referrerPolicy: 'no-referrer',
+		});
+
+		const vehicleData = vehicleApiResponse?.data;
+		console.log(`axios vehicleApiResponse ${JSON.stringify(vehicleData)}`);
+
+		const tokenApiResponse = await axios(TokenUrl, {
 			method: 'POST',
 			mode: 'cors',
 			cache: 'no-cache',
@@ -15,10 +39,11 @@ export const usefetchToken = async (planetCfg, setPlanetCfg) => {
 				Accept: 'application/json',
 			},
 		});
-		
-		const token= response?.data?.token;
-		console.log(`axios response ${JSON.stringify(response)}`);
-		setPlanetCfg({ ...planetCfg, token });
+
+		const token = tokenApiResponse?.data?.token;
+		console.log(`axios tokenApiResponse ${JSON.stringify(tokenApiResponse)}`);
+		setPlanetCfg({ ...planetCfg, token, planetData, vehicleData });
+
 	} catch (err) {
 		console.log(`axios error ${JSON.stringify(err)}`);
 		setPlanetCfg({ ...planetCfg, apiError: err.response.data });
