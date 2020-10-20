@@ -30,6 +30,45 @@ const SelectPlanet = () => {
 		setIsClicked(!isClicked);
 	};
 
+	const planetCordinates = [
+		{
+			name: Planet1,
+			topPos: "10vh",
+			leftPos: "0vw",
+			width: "4vw",
+		},
+		{
+			name: Planet2,
+			width: "8vw",
+			topPos: "15vh",
+			leftPos: "10vw",
+		},
+		{
+			name: Planet3,
+			topPos: "2vh",
+			leftPos: "20vw",
+			width: "4vw",
+		},
+		{
+			name: Planet4,
+			topPos: "10vh",
+			leftPos: "50vw",
+			width: "8vw",
+		},
+		{
+			name: Planet5,
+			topPos: "20vh",
+			leftPos: "40vw",
+			width: "4vw",
+		},
+		{
+			name: Planet6,
+			width: "4vw",
+			topPos: "22vh",
+			leftPos: "28vw",
+		},
+	];
+
 	return (
 		<React.Fragment>
 			<aside className="starGridWrapper">
@@ -42,65 +81,25 @@ const SelectPlanet = () => {
 						DonLon, Enchai, Jebing, Sapir, Lerbin & Pingasor. Choose 4 planets you’d like to Invade.
 					</Heading>
 					<SolarSystemImage>
-						<Planet
-							onClick={animateSelectedPlanet}
-							data-planetname="Planet1"
-							topPos="10vh"
-							leftPos="0vw"
-							src={Planet1}
-						/>
-						<Planet
-							onClick={animateSelectedPlanet}
-							data-planetname="Planet2"
-							width="8vw"
-							topPos="15vh"
-							leftPos="10vw"
-							src={Planet2}
-						/>
-						<Planet
-							onClick={animateSelectedPlanet}
-							data-planetname="Planet3"
-							topPos="2vh"
-							leftPos="20vw"
-							src={Planet3}
-						/>
-						<Planet
-							onClick={animateSelectedPlanet}
-							data-planetname="Planet4"
-							topPos="22vh"
-							leftPos="26vw"
-							src={Planet6}
-						/>
-						<Planet
-							onClick={animateSelectedPlanet}
-							data-planetname="Planet5"
-							topPos="20vh"
-							leftPos="40vw"
-							src={Planet5}
-						/>
-						<Planet
-							onClick={animateSelectedPlanet}
-							data-planetname="Planet6"
-							width="8vw"
-							topPos="10vh"
-							leftPos="50vw"
-							src={Planet4}
-						/>
+						{planetCordinates.map((_, idx) => {
+							return (
+								<Planet onClick={animateSelectedPlanet} 
+								width={_.width} topPos={_.topPos} leftPos={_.leftPos}
+								data-planetname={`Planet${idx+1}`} src={_.name} />
+							);
+						})}
 					</SolarSystemImage>
 				</SolarSystemWrapper>
 				<PlanetWrapper>
-					<SelectedPlanet>
-						<SelectedPlanetImg style={props} />
-					</SelectedPlanet>
-					<SelectedPlanet>
-						<SelectedPlanetImg style={props} />
-					</SelectedPlanet>
-					<SelectedPlanet>
-						<SelectedPlanetImg style={props} />
-					</SelectedPlanet>
-					<SelectedPlanet>
-						<SelectedPlanetImg style={props} />
-					</SelectedPlanet>
+					{Array(4)
+						.fill('')
+						.map(() => {
+							return (
+								<SelectedPlanet>
+									<SelectedPlanetImg style={props} />
+								</SelectedPlanet>
+							);
+						})}
 				</PlanetWrapper>
 			</SelectedPlanetWrapper>
 		</React.Fragment>
