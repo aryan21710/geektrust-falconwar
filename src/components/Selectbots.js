@@ -9,7 +9,8 @@ import {
 	Heading,
 	Button,
 	ButtonText,
-	AnimatedMiniJet,
+    AnimatedMiniJet,
+    Select
 } from './common/StyledComponent';
 import { useSpring, config } from 'react-spring';
 import Planet1 from '../public/images/1.png';
@@ -18,6 +19,7 @@ import Planet3 from '../public/images/3.png';
 import Planet4 from '../public/images/4.png';
 import minijet from '../public/images/minijet.png';
 import { useHistory } from 'react-router';
+import uuid from 'react-uuid';
 
 const SelectBots = () => {
 	const history = useHistory();
@@ -33,7 +35,7 @@ const SelectBots = () => {
 
 	const btnTextProp = useSpring({
 		opacity: isHover ? 0 : 1,
-		config: config.slow,
+		config: config.stiff,
 	});
 	const selectedPlanetDetails = [
 		{
@@ -58,6 +60,29 @@ const SelectBots = () => {
 		},
 	];
 
+	const botDetails = [
+		{
+			imgName: Planet1,
+			name: 'SPACE-BOT',
+			distance: '100megamiles',
+		},
+		{
+			imgName: Planet2,
+			name: 'SPACE-ROCKET',
+			distance: '100megamiles',
+		},
+		{
+			imgName: Planet3,
+			name: 'SPACE-SHIP',
+			distance: '100megamiles',
+		},
+		{
+			imgName: Planet4,
+			name: 'SPACE-SHUTTLE',
+			distance: '100megamiles',
+		},
+	];
+
 	return (
 		<SelectedPlanetWrapper justifyContent="center">
 			<Heading color="#FAD107" fontSize="1.2rem" fontFamily="Avenir">
@@ -65,12 +90,23 @@ const SelectBots = () => {
 			</Heading>
 			<SolarSystemWrapper height="50vh" width="100vw" flexDirection="row">
 				{selectedPlanetDetails.map((planetDetails) => (
-					<BadgeWrapper height="50vh" flexDirection="column">
+					<BadgeWrapper key={uuid()} height="50vh" flexDirection="column">
 						<SelectedPlanetImg imgname={planetDetails.imgName} />
 						<Heading color="#FAD107" fontSize="1.2rem">
 							{planetDetails.planetName}
 						</Heading>
 						<Heading color="#FAD107" fontSize="1rem">{`DISTANCE ${planetDetails.distance}`}</Heading>
+						<Select
+							name="planetName"
+							value={''}
+							// onChange={}
+						>
+							{botDetails.map((bot,idx) => (
+								<option key={uuid()} value="planetName">
+									{bot.name}
+								</option>
+							))}
+						</Select>
 					</BadgeWrapper>
 				))}
 			</SolarSystemWrapper>

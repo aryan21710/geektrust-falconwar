@@ -29,7 +29,7 @@ const LandingPage = () => {
 
 	const btnTextProp = useSpring({
 		opacity: isHover ? 0 : 1,
-		config: config.slow,
+		config: config.stiff,
 	});
 
 	const changePageOnClick = () => history.push('/selectplanets');
