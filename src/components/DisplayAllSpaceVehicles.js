@@ -9,7 +9,6 @@ import {
 	AnimatedMiniJet,
 	SolarSystemWrapper,
 } from './common/StyledComponent';
-import { StarGrid } from './common/StarGrid';
 import minijet from '../public/images/minijet.png';
 import { useHistory } from 'react-router';
 import { useSpring, config } from 'react-spring';
@@ -33,7 +32,7 @@ const DisplayAllSpaceVehicles = () => {
 		config: config.slow,
 	});
 
-	const changePageOnClick = () => history.push('/selectplanets');
+	const changePageOnClick = () => history.push('/selectbots');
 
 	return (
 		<React.Fragment>
@@ -41,7 +40,7 @@ const DisplayAllSpaceVehicles = () => {
 				<Heading color="#FAD107" fontSize="1.2rem" fontFamily="Avenir">
 					Space Vehicles at King Shan's disposal
 				</Heading>
-				<SolarSystemWrapper height="55vh" width="100vw" flexDirection="row">
+				<SolarSystemWrapper height="65vh" width="100vw" flexDirection="row">
 					<BadgeWrapper height="50vh" flexDirection="column">
 						<ImageWrapper
 							rotateBy="25deg"

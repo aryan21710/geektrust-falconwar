@@ -15,7 +15,6 @@ import {
 	AnimatedJetWrapper
 } from './common/StyledComponent';
 import uuid from 'react-uuid';
-import { StarGrid } from './common/StarGrid';
 import minijet from '../public/images/minijet.png';
 import Planet1 from '../public/images/1.png';
 import Planet2 from '../public/images/2.png';
@@ -186,12 +185,12 @@ const SelectPlanet = () => {
 
 	return (
 		<React.Fragment>
-			<SelectedPlanetWrapper>
+			<SelectedPlanetWrapper justifyContent="space-evenly">
 			<AnimatedJetWrapper style={jetAnimatedProp} >
 				<Heading color="#FAD107" fontSize="1rem">Select Space Vehicle</Heading>
 				<AnimatedMiniJet onClick={moveToDisplayVehiclePage} src={minijet} />
 			</AnimatedJetWrapper>
-				<SolarSystemWrapper>
+				<SolarSystemWrapper height="45vh">
 					<Heading fontFamily="Avenir" fontSize="1.2rem" color="#FAD107">
 						King Shan has received intelligence that Al Falcone is in hiding in one of these 6 planets -
 						DonLon, Enchai, Jebing, Sapir, Lerbin & Pingasor. <b>Choose 4 planets you’d like to Invade.</b>

@@ -38,9 +38,9 @@ export const Heading = styled.h1`
 	color: ${(props) => props.color || 'white'};
 	text-align: center;
 	font-family: ${(props) => props.fontFamily || 'Nasalisation'};
-	margin: 2.5px auto;
 	z-index: 1000;
 	font-weight: 100;
+	margin: 2.5px auto;
 	@media (max-width: 768px) {
 		font-size: 1rem;
 	}
@@ -97,7 +97,7 @@ export const Button = styled.div`
 	outline: none;
 	cursor: pointer;
 	position: relative;
-	margin: 5vh auto;
+	margin: ${props=>props.margin || "0 auto"};
 	border: 0px solid transparent;
 	overflow: hidden;
 	width: ${props=>props.width};
@@ -145,7 +145,7 @@ export const SelectedPlanetWrapper = styled.div`
 	padding: 0;
 	overflow: hidden;
 	display: flex;
-	justify-content: space-around;
+	justify-content: ${props=>props.justifyContent || "center"};
 	align-items: center;
 	flex-direction: column;
 	@media (max-width: 768px) {
@@ -161,7 +161,7 @@ export const SolarSystemWrapper = styled.div`
 	align-items: center;
 	flex-direction: column;
 	width: ${props=>props.width || "80vw"};
-	flex-direction: ${props=>props.flexDirection || "80vw"};
+	flex-direction: ${props=>props.flexDirection || "column"};
 	height: ${props=>props.height || "50vh"};
 	z-index: 100;
 	@media (max-width: 768px) {
@@ -212,7 +212,7 @@ export const SelectedPlanet = styled.div`
 	display: flex;
 	flex-direction: row;
 	flex: 1;
-	height: 25vh;
+	height: 30vh;
 	position: relative;
 	overflow: hidden;
 	@media (max-width: 768px) {
@@ -247,7 +247,7 @@ const animateSelectedPlanet = keyframes`
 export const UnAnimatedWrapper = styled.div`
 	display: flex;
 	justify-content: space-around;
-	height: 25vh;
+	height: 30vh;
 	width: 100%;
 	flex: 1;
 	position: absolute;

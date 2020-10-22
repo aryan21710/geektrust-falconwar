@@ -14,7 +14,6 @@ import kingShan from '../public/images/modiji.png';
 import queen from '../public/images/xi jhi.png';
 import { useHistory } from 'react-router';
 import { PlanetDetailsContext } from '../context/appContext';
-import { StarGrid } from './common/StarGrid';
 import { useSpring, config } from 'react-spring';
 import minijet from '../public/images/minijet.png';
 
