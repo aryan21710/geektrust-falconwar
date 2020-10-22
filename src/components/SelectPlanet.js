@@ -153,7 +153,7 @@ const SelectPlanet = () => {
 			</aside>
 			<SelectedPlanetWrapper>
 				<SolarSystemWrapper>
-					<Heading fontSize="1.2rem" color="#FAD107">
+					<Heading fontFamily="Avenir" fontSize="1.2rem" color="#FAD107">
 						King Shan has received intelligence that Al Falcone is in hiding in one of these 6 planets -
 						DonLon, Enchai, Jebing, Sapir, Lerbin & Pingasor. Choose 4 planets you’d like to Invade.
 					</Heading>
@@ -182,6 +182,7 @@ const SelectPlanet = () => {
 								return (
 									<StaticWrapper width={idx === 4 || idx === 5 ? '0vw' : '25vw'}>
 										<AnimatedWrapper>
+											<Heading>{`Selected Planet - ${idx + 1}`}</Heading>
 											<SelectedPlanetImg imgname={_.imgname} />
 											<Heading fontSize="1rem">{_.planetname}</Heading>
 											<Heading fontSize="1rem">{`DISTANCE ${_.distance} megamiles`}</Heading>
@@ -192,6 +193,7 @@ const SelectPlanet = () => {
 								return (
 									<StaticWrapper width={idx === 4 || idx === 5 ? '0vw' : '25vw'}>
 										<UnAnimatedWrapper leftPos="0vw">
+											<Heading>{`Selected Planet - ${idx + 1}`}</Heading>
 											<SelectedPlanetImg imgname={_.imgname} />
 											<Heading fontSize="1rem">{_.planetname}</Heading>
 											<Heading fontSize="1rem">{`DISTANCE ${_.distance} megamiles`}</Heading>
@@ -202,6 +204,7 @@ const SelectPlanet = () => {
 								return (
 									<StaticWrapper width={idx === 4 || idx === 5 ? '0vw' : '25vw'}>
 										<UnAnimatedWrapper>
+											<Heading>{`Selected Planet - ${idx + 1}`}</Heading>
 											<SelectedPlanetImg imgname={_.imgname} />
 											<Heading fontSize="1rem">{_.planetname}</Heading>
 											<Heading fontSize="1rem">{`DISTANCE ${_.distance} megamiles`}</Heading>

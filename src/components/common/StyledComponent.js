@@ -242,7 +242,7 @@ export const UnAnimatedWrapper = styled.div`
 `;
 
 export const AnimatedWrapper = styled(UnAnimatedWrapper)`
-	animation: ${animateSelectedPlanet} 0.5s ease-in-out forwards;
+	animation: ${animateSelectedPlanet} 0.5s cubic-bezier(0.1, 1, 1.0, 2) forwards;
 `;
 
 export const StaticWrapper = styled.div`
