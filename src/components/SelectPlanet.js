@@ -55,16 +55,15 @@ const SelectPlanet = () => {
 						imgname: imgname,
 						index: count - 1,
 						planetname,
-						distance
+						distance,
 					};
-				} else if (_.animated && idx !== count) {
+				} else if (_.animated && idx !== count - 1) {
 					return {
 						animated: false,
 						imgname: _.imgname,
 						index: _.index,
 						planetname: _.planetname,
 						distance: _.distance,
-
 					};
 				} else {
 					return {
@@ -73,7 +72,6 @@ const SelectPlanet = () => {
 						index: _.index,
 						planetname: _.planetname,
 						distance: _.distance,
-
 					};
 				}
 			});
@@ -96,13 +94,20 @@ const SelectPlanet = () => {
 		}
 	}, [planetindex]);
 
+	const isPlanetAlreadySelected = (planetname) =>
+		selectedPlanet.some((planetData) => planetData.planetname === planetname);
+
 	const animateSelectedPlanet = (e) => {
 		const { planetname, planetindex, imgname, distance } = e.target.dataset;
-		setCount(count + 1);
-		setPlanetIndex(planetindex);
-		setImgname(imgname);
-		setDistance(distance);
-		setPlanetName(planetname);
+		if (isPlanetAlreadySelected(planetname)) {
+			alert('PLANET ALREADY SELECTED.. PLEASE SELECT SOME OTHER PLANET');
+		} else {
+			setCount(count + 1);
+			setPlanetIndex(planetindex);
+			setImgname(imgname);
+			setDistance(distance);
+			setPlanetName(planetname);
+		}
 	};
 
 	let updatedPlanetData = planetData
@@ -175,7 +180,7 @@ const SelectPlanet = () => {
 						{selectedPlanet.map((_, idx) => {
 							if (conditionForAnimation(_) && _.animated) {
 								return (
-									<StaticWrapper width={(idx===4 || idx ===5) ? "0vw" : "25vw"}>
+									<StaticWrapper width={idx === 4 || idx === 5 ? '0vw' : '25vw'}>
 										<AnimatedWrapper>
 											<SelectedPlanetImg imgname={_.imgname} />
 											<Heading fontSize="1rem">{_.planetname}</Heading>
@@ -185,7 +190,7 @@ const SelectPlanet = () => {
 								);
 							} else if (!_.animated && conditionForAnimation(_)) {
 								return (
-									<StaticWrapper width={(idx===4 || idx ===5) ? "0vw" : "25vw"}>
+									<StaticWrapper width={idx === 4 || idx === 5 ? '0vw' : '25vw'}>
 										<UnAnimatedWrapper leftPos="0vw">
 											<SelectedPlanetImg imgname={_.imgname} />
 											<Heading fontSize="1rem">{_.planetname}</Heading>
@@ -195,7 +200,7 @@ const SelectPlanet = () => {
 								);
 							} else {
 								return (
-									<StaticWrapper width={(idx===4 || idx ===5) ? "0vw" : "25vw"}>
+									<StaticWrapper width={idx === 4 || idx === 5 ? '0vw' : '25vw'}>
 										<UnAnimatedWrapper>
 											<SelectedPlanetImg imgname={_.imgname} />
 											<Heading fontSize="1rem">{_.planetname}</Heading>
