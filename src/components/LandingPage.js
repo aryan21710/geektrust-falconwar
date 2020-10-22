@@ -34,9 +34,7 @@ const LandingPage = () => {
 	});
 
 	const changePageOnClick = () => history.push('/selectplanets');
-
 	const animateJet = () => setIshover(true);
-
 	const unAnimateJet = () => setIshover(false);
 
 	return (
@@ -63,7 +61,7 @@ const LandingPage = () => {
 						will be exiled for another 15 years…
 					</Heading>
 					<Button onMouseEnter={animateJet} onMouseLeave={unAnimateJet} onClick={changePageOnClick}>
-						<AnimatedMiniJet style={jetAnimatedProp} src={minijet} />
+						<AnimatedMiniJet leftPos="0vh" style={jetAnimatedProp} src={minijet} />
 						<ButtonText style={btnTextProp}>Lets Find Falcone</ButtonText>
 					</Button>
 				</ButtonWrapper>

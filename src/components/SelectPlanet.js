@@ -23,15 +23,20 @@ import Planet3 from '../public/images/3.png';
 import Planet4 from '../public/images/4.png';
 import Planet5 from '../public/images/5.png';
 import Planet6 from '../public/images/6.png';
-import { useSpring, config } from 'react-spring';
+import { useSpring } from 'react-spring';
 import { useFetchDataFromBackend } from '../customHooks/useFetchDataFromBackend';
 import { PlanetDetailsContext } from '../context/appContext';
+import { useHistory } from 'react-router';
+
+
 
 const SelectPlanet = () => {
 	const { planetCfg, setPlanetCfg } = useContext(PlanetDetailsContext);
+	const history = useHistory();
 	useFetchDataFromBackend(planetCfg, setPlanetCfg);
 	const { planetData } = planetCfg;
 	const [count, setCount] = useState(0);
+
 
 	const jetAnimatedProp = useSpring({
 		transform: count===4 ? 'translateX(104vw)' : 'translateX(0vw)',
@@ -177,6 +182,8 @@ const SelectPlanet = () => {
 
 	const conditionForAnimation = (_) => _.index >= 0;
 
+	const moveToDisplayVehiclePage=()=>history.push(`/displayallspacevehicles`)
+
 	return (
 		<React.Fragment>
 			<aside className="starGridWrapper">
@@ -185,7 +192,7 @@ const SelectPlanet = () => {
 			<SelectedPlanetWrapper>
 			<AnimatedJetWrapper style={jetAnimatedProp} >
 				<Heading color="#FAD107" fontSize="1rem">Select Space Vehicle</Heading>
-				<AnimatedMiniJet src={minijet} />
+				<AnimatedMiniJet onClick={moveToDisplayVehiclePage} src={minijet} />
 			</AnimatedJetWrapper>
 				<SolarSystemWrapper>
 					<Heading fontFamily="Avenir" fontSize="1.2rem" color="#FAD107">

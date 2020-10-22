@@ -11,6 +11,7 @@ const Header = lazy(() => import('../components/common/Header'));
 const Footer = lazy(() => import('../components/common/Footer'));
 const SelectPlanet = lazy(() => import('../components/SelectPlanet'));
 const SelectBot = lazy(() => import('../components/SelectBot'));
+const DisplayAllSpaceVehicles=lazy(() => import('../components/DisplayAllSpaceVehicles'));
 
 class DebugRouter extends Router {
 	constructor(props) {
@@ -49,6 +50,8 @@ const Approutes = () => {
 						<Route path={`/`} exact={true} strict component={LandingPage} />
 						<Route path={`/selectplanets`} exact={true} strict component={SelectPlanet} />
 						<Route path={`/selectbots`} exact={true} strict component={SelectBot} />
+						<Route path={`/displayallspacevehicles`} exact={true} strict component={DisplayAllSpaceVehicles} />
+
 						<Footer />
 					</PlanetDetailsContext.Provider>
 				</Suspense>

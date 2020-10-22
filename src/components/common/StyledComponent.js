@@ -131,6 +131,7 @@ export const AnimatedMiniJet = styled(animated.img)`
 	object-fit: cover;
 	position: absolute;
 	cursor: pointer;
+	left: ${props=>props.leftPos}
 
 `;
 
