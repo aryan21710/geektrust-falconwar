@@ -39,9 +39,6 @@ const LandingPage = () => {
 
 	return (
 		<React.Fragment>
-			<aside className="starGridWrapper">
-				<StarGrid />
-			</aside>
 			<Wrapper>
 				<BadgeWrapper flexDirection="column">
 					<ImageWrapper marginBottom="3vh" src={kingShan} />

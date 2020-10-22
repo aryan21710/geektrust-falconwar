@@ -5,6 +5,9 @@ import PropTypes from 'prop-types';
 import PrivateRoute from './PrivateRoute';
 import ErrorBoundary from '../components/common/ErrorBoundaryComp';
 
+import { StarGrid } from '../components/common/StarGrid';
+
+
 // *** LAZY LOAD ALL COMPONENTS STARTS ***
 const LandingPage = lazy(() => import('../components/LandingPage'));
 const Header = lazy(() => import('../components/common/Header'));
@@ -46,12 +49,18 @@ const Approutes = () => {
 			<Switch>
 				<Suspense fallback={<div>Loading</div>}>
 					<PlanetDetailsContext.Provider value={{ planetCfg, setPlanetCfg }}>
+					<React.Fragment>
+					<aside className="starGridWrapper">
+						<StarGrid />
+					</aside>
 						<Header />
 						<Route path={`/`} exact={true} strict component={LandingPage} />
 						<Route path={`/selectplanets`} exact={true} strict component={SelectPlanet} />
 						<Route path={`/selectbots`} exact={true} strict component={SelectBots} />
 						<Route path={`/displayallspacevehicles`} exact={true} strict component={DisplayAllSpaceVehicles} />
 						<Footer />
+
+					</React.Fragment>
 					</PlanetDetailsContext.Provider>
 				</Suspense>
 			</Switch>

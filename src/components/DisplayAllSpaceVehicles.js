@@ -37,9 +37,6 @@ const DisplayAllSpaceVehicles = () => {
 
 	return (
 		<React.Fragment>
-			<aside className="starGridWrapper">
-				<StarGrid />
-			</aside>
 			<Wrapper flexDirection="column">
 				<Heading color="#FAD107" fontSize="1.2rem" fontFamily="Avenir">
 					Space Vehicles at King Shan's disposal

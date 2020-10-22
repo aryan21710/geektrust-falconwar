@@ -186,9 +186,6 @@ const SelectPlanet = () => {
 
 	return (
 		<React.Fragment>
-			<aside className="starGridWrapper">
-				<StarGrid />
-			</aside>
 			<SelectedPlanetWrapper>
 			<AnimatedJetWrapper style={jetAnimatedProp} >
 				<Heading color="#FAD107" fontSize="1rem">Select Space Vehicle</Heading>
