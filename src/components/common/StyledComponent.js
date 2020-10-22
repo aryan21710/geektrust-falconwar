@@ -38,7 +38,7 @@ export const Heading = styled.h1`
 	color: ${(props) => props.color || 'white'};
 	text-align: center;
 	font-family: ${(props) => props.fontFamily || 'Nasalisation'};
-	margin: 0 auto;
+	margin: 2.5px auto;
 	z-index: 1000;
 	font-weight: 100;
 	@media (max-width: 768px) {
@@ -51,7 +51,7 @@ export const BadgeWrapper = styled.div`
 	justify-content: center;
 	align-items: center;
 	flex-direction: ${(props) => props.flexDirection || 'row'};
-	height: 75vh;
+	height: ${props=>props.height || "75vh"};
 	flex: 1;
 	z-index: 2;
 	@media (max-width: 768px) {
@@ -72,11 +72,12 @@ export const ButtonWrapper = styled.div`
 `;
 
 export const ImageWrapper = styled.img`
-	border-radius: 50%;
+	border-radius: ${(props) => props.borderRad || '50%'};
 	margin-bottom: ${(props) => props.marginBottom || '0vh'};
 	height: ${(props) => props.height || '30vh'};
 	width: ${(props) => props.height || '30vh'};
-	object-fit: cover;
+	object-fit: ${(props) => props.objectFit || 'cover'};
+	transform: rotate(${(props) => props.rotateBy || 'none'});
 	@media (max-width: 768px) {
 		height: 20vh;
 		width: 20vh;
@@ -96,8 +97,10 @@ export const Button = styled.div`
 	outline: none;
 	cursor: pointer;
 	position: relative;
+	margin: 5vh auto;
 	border: 0px solid transparent;
 	overflow: hidden;
+	width: ${props=>props.width};
 	background: linear-gradient(to bottom, #ffc810, #b43e00);
 	@media (max-width: 768px) {
 		padding: 0vh 2vw;
@@ -157,8 +160,9 @@ export const SolarSystemWrapper = styled.div`
 	justify-content: space-around;
 	align-items: center;
 	flex-direction: column;
-	width: 80vw;
-	height: 50vh;
+	width: ${props=>props.width || "80vw"};
+	flex-direction: ${props=>props.flexDirection || "80vw"};
+	height: ${props=>props.height || "50vh"};
 	z-index: 100;
 	@media (max-width: 768px) {
 		width: 100vw;

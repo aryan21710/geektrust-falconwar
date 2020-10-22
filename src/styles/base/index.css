@@ -75,7 +75,7 @@ code {
 }
 
 .star {
-	background-image: url('../../public/images/star 1.png');
+	background-image: url('../../public/images/star1.png');
 	background-repeat: no-repeat;
 	background-position: center;
 	transform: rotate(40deg);
