@@ -181,7 +181,7 @@ export const PlanetWrapper = styled.div`
 	justify-content: center;
 	align-items: center;
 	width: 100vw;
-	height: 35vh;
+	height: 45vh;
 	@media (max-width: 768px) {
 		width: 100vw;
 		height: 80vh;
