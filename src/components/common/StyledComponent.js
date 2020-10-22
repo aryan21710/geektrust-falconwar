@@ -125,7 +125,7 @@ export const SelectedPlanetWrapper = styled.div`
 	padding: 0;
 	overflow: hidden;
 	display: flex;
-	justify-content: center;
+	justify-content: space-around;
 	align-items: center;
 	flex-direction: column;
 	@media (max-width: 768px) {
@@ -178,10 +178,8 @@ export const Planet = styled(animated.img)`
 
 export const PlanetWrapper = styled.div`
 	display: flex;
-	justify-content: center;
-	align-items: center;
 	width: 100vw;
-	height: 45vh;
+	height: 25vh;
 	@media (max-width: 768px) {
 		width: 100vw;
 		height: 80vh;
