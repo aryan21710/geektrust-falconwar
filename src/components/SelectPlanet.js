@@ -155,7 +155,7 @@ const SelectPlanet = () => {
 				<SolarSystemWrapper>
 					<Heading fontFamily="Avenir" fontSize="1.2rem" color="#FAD107">
 						King Shan has received intelligence that Al Falcone is in hiding in one of these 6 planets -
-						DonLon, Enchai, Jebing, Sapir, Lerbin & Pingasor. Choose 4 planets you’d like to Invade.
+						DonLon, Enchai, Jebing, Sapir, Lerbin & Pingasor. <b>Choose 4 planets you’d like to Invade.</b>
 					</Heading>
 					<SolarSystemImage>
 						{updatedPlanetData.map((_, idx) => {

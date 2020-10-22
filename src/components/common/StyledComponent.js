@@ -72,6 +72,7 @@ export const ButtonWrapper = styled.div`
 
 export const ImageWrapper = styled.img`
 	border-radius: 50%;
+	margin-bottom: ${props=>props.marginBottom || "0vh"};
 	height: ${(props) => props.height || '30vh'};
 	width: ${(props) => props.height || '30vh'};
 	object-fit: cover;

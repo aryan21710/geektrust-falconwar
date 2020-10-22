@@ -24,8 +24,8 @@ const LandingPage = () => {
 	useFetchDataFromBackend(planetCfg, setPlanetCfg);
 	const history = useHistory();
 	const jetAnimatedProp = useSpring({
-		transform: isHover ? 'translateX(10vw)' : 'translateX(-30vw)',
-		config: config.slow,
+		transform: isHover ? 'translateX(6vw)' : 'translateX(-30vw)',
+		config: config.stiff,
 	});
 
 	const btnTextProp = useSpring({
@@ -46,13 +46,13 @@ const LandingPage = () => {
 			</aside>
 			<Wrapper>
 				<BadgeWrapper flexDirection="column">
-					<ImageWrapper src={kingShan} />
+					<ImageWrapper marginBottom="3vh" src={kingShan} />
 					<Heading fontSize="1.5rem" color="#FAD107">
 						King Shan
 					</Heading>
 				</BadgeWrapper>
 				<BadgeWrapper flexDirection="column">
-					<ImageWrapper src={queen} />
+					<ImageWrapper marginBottom="3vh" src={queen} />
 					<Heading fontSize="1.5rem" color="#FAD107">
 						Queen Falcornia
 					</Heading>
