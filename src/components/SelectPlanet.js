@@ -11,15 +11,19 @@ import {
 	AnimatedWrapper,
 	UnAnimatedWrapper,
 	StaticWrapper,
+	AnimatedMiniJet,
+	AnimatedJetWrapper
 } from './common/StyledComponent';
 import uuid from 'react-uuid';
 import { StarGrid } from './common/StarGrid';
+import minijet from '../public/images/minijet.png';
 import Planet1 from '../public/images/1.png';
 import Planet2 from '../public/images/2.png';
 import Planet3 from '../public/images/3.png';
 import Planet4 from '../public/images/4.png';
 import Planet5 from '../public/images/5.png';
 import Planet6 from '../public/images/6.png';
+import { useSpring, config } from 'react-spring';
 import { useFetchDataFromBackend } from '../customHooks/useFetchDataFromBackend';
 import { PlanetDetailsContext } from '../context/appContext';
 
@@ -28,6 +32,12 @@ const SelectPlanet = () => {
 	useFetchDataFromBackend(planetCfg, setPlanetCfg);
 	const { planetData } = planetCfg;
 	const [count, setCount] = useState(0);
+
+	const jetAnimatedProp = useSpring({
+		transform: count===4 ? 'translateX(104vw)' : 'translateX(0vw)',
+		delay: 700,
+		config: { mass: 1, tension: 280, friction: 50 }
+	});
 
 	const [planetindex, setPlanetIndex] = useState(-1);
 	const [imgname, setImgname] = useState('');
@@ -94,6 +104,27 @@ const SelectPlanet = () => {
 		}
 	}, [planetindex]);
 
+
+	useEffect(()=>{
+		if (count === 0) {
+			setPlanetIndex("");
+			setImgname("");
+			setDistance("");
+			setPlanetName("");
+			setSelectedPlanet(
+				Array(6)
+					.fill('')
+					.map(() => ({
+						animated: false,
+						imgname: '',
+						index: -1,
+						planetname: '',
+						distance: '',
+					}))
+			);
+		}
+	},[count])
+
 	const isPlanetAlreadySelected = (planetname) =>
 		selectedPlanet.some((planetData) => planetData.planetname === planetname);
 
@@ -152,6 +183,10 @@ const SelectPlanet = () => {
 				<StarGrid />
 			</aside>
 			<SelectedPlanetWrapper>
+			<AnimatedJetWrapper style={jetAnimatedProp} >
+				<Heading color="#FAD107" fontSize="1rem">Select Space Vehicle</Heading>
+				<AnimatedMiniJet src={minijet} />
+			</AnimatedJetWrapper>
 				<SolarSystemWrapper>
 					<Heading fontFamily="Avenir" fontSize="1.2rem" color="#FAD107">
 						King Shan has received intelligence that Al Falcone is in hiding in one of these 6 planets -

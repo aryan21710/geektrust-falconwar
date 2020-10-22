@@ -19,6 +19,7 @@ export const Wrapper = styled.div`
 	}
 `;
 
+
 export const HeaderWrapper = styled.div`
 	width: 100vw;
 	height: ${(props) => props.height || '10vh'};
@@ -72,7 +73,7 @@ export const ButtonWrapper = styled.div`
 
 export const ImageWrapper = styled.img`
 	border-radius: 50%;
-	margin-bottom: ${props=>props.marginBottom || "0vh"};
+	margin-bottom: ${(props) => props.marginBottom || '0vh'};
 	height: ${(props) => props.height || '30vh'};
 	width: ${(props) => props.height || '30vh'};
 	object-fit: cover;
@@ -111,12 +112,26 @@ export const ButtonText = styled(animated.p)`
 	text-align: center;
 `;
 
+
+export const AnimatedJetWrapper = styled(animated.div)`
+	width: ${(props) => props.width || '20vw'};
+	height: ${(props) => props.height || '10vh'};
+	position: absolute;
+	top: 50vh;
+	left: -25vw;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-end;
+`;
+
 export const AnimatedMiniJet = styled(animated.img)`
 	width: 50px;
 	height: 20px;
 	object-fit: cover;
 	position: absolute;
-	left: 0vh;
+	cursor: pointer;
+
 `;
 
 export const SelectedPlanetWrapper = styled.div`
@@ -241,11 +256,11 @@ export const UnAnimatedWrapper = styled.div`
 `;
 
 export const AnimatedWrapper = styled(UnAnimatedWrapper)`
-	animation: ${animateSelectedPlanet} 0.5s cubic-bezier(0.1, 1, 1.0, 2) forwards;
+	animation: ${animateSelectedPlanet} 0.5s ease-in-out forwards;
 `;
 
 export const StaticWrapper = styled.div`
 	position: relative;
 	overflow: hidden;
-	width: ${props=>props.width || "25vw"}	
+	width: ${(props) => props.width || '25vw'};
 `;
