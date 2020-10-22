@@ -51,7 +51,6 @@ const Approutes = () => {
 						<Route path={`/selectplanets`} exact={true} strict component={SelectPlanet} />
 						<Route path={`/selectbots`} exact={true} strict component={SelectBots} />
 						<Route path={`/displayallspacevehicles`} exact={true} strict component={DisplayAllSpaceVehicles} />
-
 						<Footer />
 					</PlanetDetailsContext.Provider>
 				</Suspense>

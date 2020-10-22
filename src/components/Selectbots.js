@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const Selectbots = () => {
+export const SelectBots = () => {
     return (
         <div>
             
