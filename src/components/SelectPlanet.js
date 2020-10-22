@@ -182,10 +182,10 @@ const SelectPlanet = () => {
 								return (
 									<StaticWrapper width={idx === 4 || idx === 5 ? '0vw' : '25vw'}>
 										<AnimatedWrapper>
-											<Heading>{`Selected Planet - ${idx + 1}`}</Heading>
+											<Heading fontSize="1.3rem">{`Selected Planet - ${idx + 1}`}</Heading>
 											<SelectedPlanetImg imgname={_.imgname} />
-											<Heading fontSize="1rem">{_.planetname}</Heading>
-											<Heading fontSize="1rem">{`DISTANCE ${_.distance} megamiles`}</Heading>
+											<Heading color="#FAD107" fontSize="1.2rem">{_.planetname}</Heading>
+											<Heading color="#FAD107" fontSize="1rem">{`DISTANCE ${_.distance} megamiles`}</Heading>
 										</AnimatedWrapper>
 									</StaticWrapper>
 								);
@@ -193,10 +193,10 @@ const SelectPlanet = () => {
 								return (
 									<StaticWrapper width={idx === 4 || idx === 5 ? '0vw' : '25vw'}>
 										<UnAnimatedWrapper leftPos="0vw">
-											<Heading>{`Selected Planet - ${idx + 1}`}</Heading>
+											<Heading fontSize="1.3rem">{`Selected Planet - ${idx + 1}`}</Heading>
 											<SelectedPlanetImg imgname={_.imgname} />
-											<Heading fontSize="1rem">{_.planetname}</Heading>
-											<Heading fontSize="1rem">{`DISTANCE ${_.distance} megamiles`}</Heading>
+											<Heading color="#FAD107" fontSize="1.2rem">{_.planetname}</Heading>
+											<Heading color="#FAD107" fontSize="1rem">{`DISTANCE ${_.distance} megamiles`}</Heading>
 										</UnAnimatedWrapper>
 									</StaticWrapper>
 								);
@@ -204,10 +204,10 @@ const SelectPlanet = () => {
 								return (
 									<StaticWrapper width={idx === 4 || idx === 5 ? '0vw' : '25vw'}>
 										<UnAnimatedWrapper>
-											<Heading>{`Selected Planet - ${idx + 1}`}</Heading>
+											<Heading fontSize="1.3rem">{`Selected Planet - ${idx + 1}`}</Heading>
 											<SelectedPlanetImg imgname={_.imgname} />
-											<Heading fontSize="1rem">{_.planetname}</Heading>
-											<Heading fontSize="1rem">{`DISTANCE ${_.distance} megamiles`}</Heading>
+											<Heading color="#FAD107" fontSize="1.2rem">{_.planetname}</Heading>
+											<Heading color="#FAD107" fontSize="1rem">{`DISTANCE ${_.distance} megamiles`}</Heading>
 										</UnAnimatedWrapper>
 									</StaticWrapper>
 								);
