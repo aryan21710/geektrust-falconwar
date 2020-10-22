@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { animated } from 'react-spring';
 import solarSystem from '../../public/images/sunWithOrbit.png';
 
@@ -164,12 +164,12 @@ export const SolarSystemImage = styled(animated.div)`
 `;
 
 export const Planet = styled(animated.img)`
-	width: ${(props) => props.width || '4vw'};
+	width: ${(props) => props.width || '6vw'};
 	object-fit: cover;
 	cursor: pointer;
 	position: absolute;
-	top: ${(props) => props.topPos || '10vh'};
-	left: ${(props) => props.leftPos || '0vw'};
+	top: ${(props) => props.toppos || '10vh'};
+	left: ${(props) => props.leftpos || '0vw'};
 	z-index: 100;
 	@media (max-width: 768px) {
 		width: 90vw;
@@ -191,28 +191,62 @@ export const PlanetWrapper = styled.div`
 
 export const SelectedPlanet = styled.div`
 	display: flex;
-	justify-content: center;
-	align-items: center;
+	flex-direction: row;
 	flex: 1;
 	height: 25vh;
 	position: relative;
 	overflow: hidden;
-	border: 2px solid white;
 	@media (max-width: 768px) {
 		width: 100vw;
 		height: 55vh;
 	}
 `;
 
-export const SelectedPlanetImg = styled(animated.img)`
-	border-radius: 50%;
-	height: 20vh;
-	position: absolute;
-	width: 20vh;
-	object-fit: cover;
-	border: 5px solid black;
+export const SelectedPlanetImg = styled(animated.div)`
+	height: 12vh;
+	width: 12vh;
+	background-image: url(${(props) => props.imgname});
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 12vh 12vh;
 	@media (max-width: 768px) {
 		height: 10vh;
 		width: 10vh;
 	}
+`;
+
+const animateSelectedPlanet = keyframes`
+    from {
+      transform: translate(0vw);
+    }
+  
+    to {
+      transform: translate(30vw);
+    }
+  `;
+
+export const UnAnimatedWrapper = styled.div`
+	display: flex;
+	justify-content: space-around;
+	height: 25vh;
+	width: 100%;
+	flex: 1;
+	position: absolute;
+	left: ${(props) => props.leftPos || '-30vw'};
+	align-items: center;
+	flex-direction: column;
+	@media (max-width: 768px) {
+		height: 10vh;
+		width: 10vh;
+	}
+`;
+
+export const AnimatedWrapper = styled(UnAnimatedWrapper)`
+	animation: ${animateSelectedPlanet} 0.5s ease-in-out forwards;
+`;
+
+export const StaticWrapper = styled.div`
+	position: relative;
+	overflow: hidden;
+	width: ${props=>props.width || "25vw"}	
 `;
