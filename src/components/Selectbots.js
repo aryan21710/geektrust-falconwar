@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import {
 	SelectedPlanetWrapper,
 	SolarSystemWrapper,
@@ -13,7 +13,15 @@ import { PlanetDetailsContext } from '../context/appContext';
 
 const SelectBots = () => {
 	const { selectedPlanet, planetCfg  } = useContext(PlanetDetailsContext);
-    const {vehicleData}=planetCfg
+	const {vehicleData}=planetCfg
+	
+	const [selectedVehicle,setSelectedVehicle]=useState("");
+
+	const onSelectedVehicle=(e)=>setSelectedVehicle(e.target.value);
+
+	useEffect(()=>{
+		selectedVehicle.length > 0 && alert(`${selectedVehicle}`);
+	},[selectedVehicle])
 
 	return (
 		<SelectedPlanetWrapper justifyContent="center">
@@ -30,16 +38,16 @@ const SelectBots = () => {
 						<Heading color="#FAD107" fontSize="1rem">{`DISTANCE ${planetDetails.distance} megamiles`}</Heading>
 						<Select
 							name="planetName"
-							value={''}
-							// onChange={}
+							value={selectedVehicle}
+							onChange={onSelectedVehicle}
 						>
-							{vehicleData.map((bot, idx) => {
+							{vehicleData.map((bot) => {
 								return bot.name==="Choose A Space Vehicle" ? (
-									<option key={uuid()} selected value="planetName">
+									<option key={uuid()} selected value={bot.name}>
 										{bot.name}
 									</option>
 								) : (
-									<option key={uuid()} value="planetName">
+									<option key={uuid()} value={bot.name}>
 										{bot.name}
 									</option>
 								);
