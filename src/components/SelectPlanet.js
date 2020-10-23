@@ -12,36 +12,35 @@ import {
 	UnAnimatedWrapper,
 	StaticWrapper,
 	AnimatedMiniJet,
-	AnimatedJetWrapper
+	AnimatedJetWrapper,
 } from './common/StyledComponent';
 import uuid from 'react-uuid';
-import minijet from '../public/images/minijet.png';
-import Planet1 from '../public/images/1.png';
-import Planet2 from '../public/images/2.png';
-import Planet3 from '../public/images/3.png';
-import Planet4 from '../public/images/4.png';
-import Planet5 from '../public/images/5.png';
-import Planet6 from '../public/images/6.png';
 import { useSpring } from 'react-spring';
 import { useFetchDataFromBackend } from '../customHooks/useFetchDataFromBackend';
 import { PlanetDetailsContext } from '../context/appContext';
 import { useHistory } from 'react-router';
-
+import { createUpdatedPlanetData } from '../common/util.js';
+import { PlanetImageArr,Images } from '../customHooks/useDefineConstants';
 
 
 const SelectPlanet = () => {
 	const { planetCfg, setPlanetCfg } = useContext(PlanetDetailsContext);
 	const history = useHistory();
 	useFetchDataFromBackend(planetCfg, setPlanetCfg);
+	const { Minijet } = Images;
+
 	const { planetData } = planetCfg;
 	const [count, setCount] = useState(0);
-
-
+	const [updatedPlanetData, setUpdatedPlanetData] = useState([]);
 	const jetAnimatedProp = useSpring({
-		transform: count===4 ? 'translateX(104vw)' : 'translateX(0vw)',
+		transform: count === 4 ? 'translateX(104vw)' : 'translateX(0vw)',
 		delay: 700,
-		config: { mass: 1, tension: 280, friction: 50 }
+		config: { mass: 1, tension: 280, friction: 50 },
 	});
+
+	useEffect(() => {
+		planetData.length > 0 && setUpdatedPlanetData([...createUpdatedPlanetData(planetData, PlanetImageArr)]);
+	}, [planetData]);
 
 	const [planetindex, setPlanetIndex] = useState(-1);
 	const [imgname, setImgname] = useState('');
@@ -108,13 +107,12 @@ const SelectPlanet = () => {
 		}
 	}, [planetindex]);
 
-
-	useEffect(()=>{
+	useEffect(() => {
 		if (count === 0) {
-			setPlanetIndex("");
-			setImgname("");
-			setDistance("");
-			setPlanetName("");
+			setPlanetIndex('');
+			setImgname('');
+			setDistance('');
+			setPlanetName('');
 			setSelectedPlanet(
 				Array(6)
 					.fill('')
@@ -127,7 +125,7 @@ const SelectPlanet = () => {
 					}))
 			);
 		}
-	},[count])
+	}, [count]);
 
 	const isPlanetAlreadySelected = (planetname) =>
 		selectedPlanet.some((planetData) => planetData.planetname === planetname);
@@ -145,51 +143,21 @@ const SelectPlanet = () => {
 		}
 	};
 
-	let updatedPlanetData = planetData
-		.map((_) => {
-			return {
-				distance: _.distance,
-				planetname: _.name,
-			};
-		})
-		.map((_, idx) => {
-			switch (idx) {
-				case 0: {
-					return { ..._, imgName: Planet1, topPos: '10vh', leftPos: '0vw' };
-				}
-				case 1: {
-					return { ..._, imgName: Planet2, topPos: '2vh', leftPos: '10vw' };
-				}
-				case 2: {
-					return { ..._, imgName: Planet3, topPos: '18vh', leftPos: '10vw' };
-				}
-				case 3: {
-					return { ..._, imgName: Planet4, topPos: '20vh', leftPos: '25vw' };
-				}
-				case 4: {
-					return { ..._, imgName: Planet5, topPos: '15vh', leftPos: '40vw' };
-				}
-				case 5: {
-					return { ..._, imgName: Planet6, topPos: '8vh', leftPos: '50vw' };
-				}
-				default:
-					return {};
-			}
-		});
-
 	console.log(`updatedPlanetData ${planetData.length} :: ${JSON.stringify(updatedPlanetData)}`);
 
 	const conditionForAnimation = (_) => _.index >= 0;
 
-	const moveToDisplayVehiclePage=()=>history.push(`/displayallspacevehicles`)
+	const moveToDisplayVehiclePage = () => history.push(`/displayallspacevehicles`);
 
 	return (
 		<React.Fragment>
 			<SelectedPlanetWrapper justifyContent="space-evenly">
-			<AnimatedJetWrapper style={jetAnimatedProp} >
-				<Heading color="#FAD107" fontSize="1rem">Select Space Vehicle</Heading>
-				<AnimatedMiniJet onClick={moveToDisplayVehiclePage} src={minijet} />
-			</AnimatedJetWrapper>
+				<AnimatedJetWrapper style={jetAnimatedProp}>
+					<Heading color="#FAD107" fontSize="1rem">
+						Select Space Vehicle
+					</Heading>
+					<AnimatedMiniJet onClick={moveToDisplayVehiclePage} src={Minijet} />
+				</AnimatedJetWrapper>
 				<SolarSystemWrapper height="45vh">
 					<Heading fontFamily="Avenir" fontSize="1.2rem" color="#FAD107">
 						King Shan has received intelligence that Al Falcone is in hiding in one of these 6 planets -
@@ -222,8 +190,13 @@ const SelectPlanet = () => {
 										<AnimatedWrapper>
 											<Heading fontSize="1.3rem">{`Selected Planet - ${idx + 1}`}</Heading>
 											<SelectedPlanetImg imgname={_.imgname} />
-											<Heading color="#FAD107" fontSize="1.2rem">{_.planetname}</Heading>
-											<Heading color="#FAD107" fontSize="1rem">{`DISTANCE ${_.distance} megamiles`}</Heading>
+											<Heading color="#FAD107" fontSize="1.2rem">
+												{_.planetname}
+											</Heading>
+											<Heading
+												color="#FAD107"
+												fontSize="1rem"
+											>{`DISTANCE ${_.distance} megamiles`}</Heading>
 										</AnimatedWrapper>
 									</StaticWrapper>
 								);
@@ -233,8 +206,13 @@ const SelectPlanet = () => {
 										<UnAnimatedWrapper leftPos="0vw">
 											<Heading fontSize="1.3rem">{`Selected Planet - ${idx + 1}`}</Heading>
 											<SelectedPlanetImg imgname={_.imgname} />
-											<Heading color="#FAD107" fontSize="1.2rem">{_.planetname}</Heading>
-											<Heading color="#FAD107" fontSize="1rem">{`DISTANCE ${_.distance} megamiles`}</Heading>
+											<Heading color="#FAD107" fontSize="1.2rem">
+												{_.planetname}
+											</Heading>
+											<Heading
+												color="#FAD107"
+												fontSize="1rem"
+											>{`DISTANCE ${_.distance} megamiles`}</Heading>
 										</UnAnimatedWrapper>
 									</StaticWrapper>
 								);
@@ -244,8 +222,13 @@ const SelectPlanet = () => {
 										<UnAnimatedWrapper>
 											<Heading fontSize="1.3rem">{`Selected Planet - ${idx + 1}`}</Heading>
 											<SelectedPlanetImg imgname={_.imgname} />
-											<Heading color="#FAD107" fontSize="1.2rem">{_.planetname}</Heading>
-											<Heading color="#FAD107" fontSize="1rem">{`DISTANCE ${_.distance} megamiles`}</Heading>
+											<Heading color="#FAD107" fontSize="1.2rem">
+												{_.planetname}
+											</Heading>
+											<Heading
+												color="#FAD107"
+												fontSize="1rem"
+											>{`DISTANCE ${_.distance} megamiles`}</Heading>
 										</UnAnimatedWrapper>
 									</StaticWrapper>
 								);

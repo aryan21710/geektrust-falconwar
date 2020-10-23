@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, {  useState } from 'react';
 import {
 	Wrapper,
 	BadgeWrapper,
@@ -9,16 +9,14 @@ import {
 	AnimatedMiniJet,
 	SolarSystemWrapper,
 } from './common/StyledComponent';
-import minijet from '../public/images/minijet.png';
 import { useHistory } from 'react-router';
 import { useSpring, config } from 'react-spring';
-import spacebot1 from '../public/images/Spaceship1.png';
-import spacebot2 from '../public/images/spaceship2.png';
-import spacebot3 from '../public/images/Spaceship3.png';
-import spacebot4 from '../public/images/spaceship4.png';
+import { SpaceBotImgArr, Images } from '../customHooks/useDefineConstants';
 
 const DisplayAllSpaceVehicles = () => {
 	const [isHover, setIshover] = useState(false);
+	const [Spacebot1, Spacebot2, Spacebot3, Spacebot4] = SpaceBotImgArr;
+	const { Minijet } = Images;
 	const unAnimateJet = () => setIshover(false);
 	const animateJet = () => setIshover(true);
 	const history = useHistory();
@@ -49,7 +47,7 @@ const DisplayAllSpaceVehicles = () => {
 							width="30vw"
 							height="40vh"
 							marginBottom="3vh"
-							src={spacebot1}
+							src={Spacebot1}
 						/>
 						<Heading fontSize="1rem" color="#FAD107">
 							SPACE ROCKET
@@ -72,7 +70,7 @@ const DisplayAllSpaceVehicles = () => {
 							width="30vw"
 							height="40vh"
 							marginBottom="3vh"
-							src={spacebot2}
+							src={Spacebot2}
 						/>
 						<Heading fontSize="1.2rem" color="#FAD107">
 							SPACE POD
@@ -95,13 +93,13 @@ const DisplayAllSpaceVehicles = () => {
 							width="30vw"
 							height="40vh"
 							marginBottom="3vh"
-							src={spacebot3}
+							src={Spacebot3}
 						/>
 						<Heading fontSize="1.2rem" color="#FAD107">
 							SPACE SHIP
 						</Heading>
 						<Heading fontSize="0.8rem" color="white">
-							Units = 2 
+							Units = 2
 						</Heading>
 						<Heading fontSize="0.8rem" color="white">
 							Max_distance = 600 megamiles
@@ -118,13 +116,13 @@ const DisplayAllSpaceVehicles = () => {
 							width="30vw"
 							height="40vh"
 							marginBottom="3vh"
-							src={spacebot4}
+							src={Spacebot4}
 						/>
 						<Heading fontSize="1.2rem" color="#FAD107">
 							SPACE SHUTTLE
 						</Heading>
 						<Heading color="white" fontSize="0.8rem">
-							Units = 1 
+							Units = 1
 						</Heading>
 						<Heading color="white" fontSize="0.8rem">
 							Max_distance = 400 megamiles
@@ -135,7 +133,7 @@ const DisplayAllSpaceVehicles = () => {
 					</BadgeWrapper>
 				</SolarSystemWrapper>
 				<Button width="15vw" onMouseEnter={animateJet} onMouseLeave={unAnimateJet} onClick={changePageOnClick}>
-					<AnimatedMiniJet leftPos="0vh" style={jetAnimatedProp} src={minijet} />
+					<AnimatedMiniJet leftPos="0vh" style={jetAnimatedProp} src={Minijet} />
 					<ButtonText style={btnTextProp}>Select Space Bots</ButtonText>
 				</Button>
 			</Wrapper>

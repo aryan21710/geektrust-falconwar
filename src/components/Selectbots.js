@@ -13,16 +13,16 @@ import {
 	Select,
 } from './common/StyledComponent';
 import { useSpring, config } from 'react-spring';
-import Planet1 from '../public/images/1.png';
-import Planet2 from '../public/images/2.png';
-import Planet3 from '../public/images/3.png';
-import Planet4 from '../public/images/4.png';
-import minijet from '../public/images/minijet.png';
+import { PlanetImageArr,Images } from '../customHooks/useDefineConstants';
+
 import { useHistory } from 'react-router';
 import uuid from 'react-uuid';
 
 const SelectBots = () => {
 	const history = useHistory();
+	const [Planet1, Planet2, Planet3, Planet4,  Planet5, Planet6]=PlanetImageArr;
+	const { Minijet } = Images;
+
 	const [isHover, setIshover] = useState(false);
 	const changePageOnClick = () => history.push('/selectbots');
 	const unAnimateJet = () => setIshover(false);
@@ -122,7 +122,7 @@ const SelectBots = () => {
 				))}
 			</SolarSystemWrapper>
 			<Button width="15vw" onMouseEnter={animateJet} onMouseLeave={unAnimateJet} onClick={changePageOnClick}>
-				<AnimatedMiniJet leftPos="0vh" style={jetAnimatedProp} src={minijet} />
+				<AnimatedMiniJet leftPos="0vh" style={jetAnimatedProp} src={Minijet} />
 				<ButtonText style={btnTextProp}>Mission Find Falcone</ButtonText>
 			</Button>
 		</SelectedPlanetWrapper>

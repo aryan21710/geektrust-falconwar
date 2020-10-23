@@ -10,15 +10,15 @@ import {
 	AnimatedMiniJet,
 } from './common/StyledComponent';
 import { useFetchDataFromBackend } from '../customHooks/useFetchDataFromBackend';
-import kingShan from '../public/images/modiji.png';
-import queen from '../public/images/xi jhi.png';
+import { Images } from '../customHooks/useDefineConstants';
 import { useHistory } from 'react-router';
 import { PlanetDetailsContext } from '../context/appContext';
 import { useSpring, config } from 'react-spring';
-import minijet from '../public/images/minijet.png';
+import { CustomButton } from '../components/common/CustomButton';
 
 const LandingPage = () => {
 	const { planetCfg, setPlanetCfg } = useContext(PlanetDetailsContext);
+	const { KingShan, Queen, Minijet } = Images;
 	const [isHover, setIshover] = useState(false);
 	useFetchDataFromBackend(planetCfg, setPlanetCfg);
 	const history = useHistory();
@@ -40,13 +40,13 @@ const LandingPage = () => {
 		<React.Fragment>
 			<Wrapper>
 				<BadgeWrapper flexDirection="column">
-					<ImageWrapper marginBottom="3vh" src={kingShan} />
+					<ImageWrapper marginBottom="3vh" src={KingShan} />
 					<Heading fontSize="1.5rem" color="#FAD107">
 						King Shan
 					</Heading>
 				</BadgeWrapper>
 				<BadgeWrapper flexDirection="column">
-					<ImageWrapper marginBottom="3vh" src={queen} />
+					<ImageWrapper marginBottom="3vh" src={Queen} />
 					<Heading fontSize="1.5rem" color="#FAD107">
 						Queen Falcornia
 					</Heading>
@@ -56,10 +56,7 @@ const LandingPage = () => {
 						Queen Al Falcone is now in hiding. But if King Shan can find her before the years are up, she
 						will be exiled for another 15 years…
 					</Heading>
-					<Button onMouseEnter={animateJet} onMouseLeave={unAnimateJet} onClick={changePageOnClick}>
-						<AnimatedMiniJet leftPos="0vh" style={jetAnimatedProp} src={minijet} />
-						<ButtonText style={btnTextProp}>Lets Find Falcone</ButtonText>
-					</Button>
+					<CustomButton redirectPath="/selectplanets" leftPos="0vh" TextForButton="Lets Find Falcone" />
 				</ButtonWrapper>
 			</Wrapper>
 		</React.Fragment>
