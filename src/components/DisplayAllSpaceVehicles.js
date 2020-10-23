@@ -1,36 +1,11 @@
-import React, {  useState } from 'react';
-import {
-	Wrapper,
-	BadgeWrapper,
-	ImageWrapper,
-	Heading,
-	Button,
-	ButtonText,
-	AnimatedMiniJet,
-	SolarSystemWrapper,
-} from './common/StyledComponent';
-import { useHistory } from 'react-router';
-import { useSpring, config } from 'react-spring';
-import { SpaceBotImgArr, Images } from '../customHooks/useDefineConstants';
+import React, { useState } from 'react';
+import { Wrapper, BadgeWrapper, ImageWrapper, Heading, SolarSystemWrapper } from './common/StyledComponent';
+
+import { SpaceBotImgArr } from '../customHooks/useDefineConstants';
+import { CustomButton } from '../components/common/CustomButton';
 
 const DisplayAllSpaceVehicles = () => {
-	const [isHover, setIshover] = useState(false);
 	const [Spacebot1, Spacebot2, Spacebot3, Spacebot4] = SpaceBotImgArr;
-	const { Minijet } = Images;
-	const unAnimateJet = () => setIshover(false);
-	const animateJet = () => setIshover(true);
-	const history = useHistory();
-	const jetAnimatedProp = useSpring({
-		transform: isHover ? 'translateX(6vw)' : 'translateX(-30vw)',
-		config: config.stiff,
-	});
-
-	const btnTextProp = useSpring({
-		opacity: isHover ? 0 : 1,
-		config: config.slow,
-	});
-
-	const changePageOnClick = () => history.push('/selectbots');
 
 	return (
 		<React.Fragment>
@@ -132,10 +107,7 @@ const DisplayAllSpaceVehicles = () => {
 						</Heading>
 					</BadgeWrapper>
 				</SolarSystemWrapper>
-				<Button width="15vw" onMouseEnter={animateJet} onMouseLeave={unAnimateJet} onClick={changePageOnClick}>
-					<AnimatedMiniJet leftPos="0vh" style={jetAnimatedProp} src={Minijet} />
-					<ButtonText style={btnTextProp}>Select Space Bots</ButtonText>
-				</Button>
+				<CustomButton redirectPath="/selectbots" leftPos="0vh" TextForButton="Select Space Bots" width="15vw" />
 			</Wrapper>
 		</React.Fragment>
 	);

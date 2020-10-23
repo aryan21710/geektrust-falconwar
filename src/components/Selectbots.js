@@ -4,39 +4,16 @@ import {
 	SolarSystemWrapper,
 	BadgeWrapper,
 	SelectedPlanetImg,
-	ImageWrapper,
-	ButtonWrapper,
 	Heading,
-	Button,
-	ButtonText,
-	AnimatedMiniJet,
 	Select,
 } from './common/StyledComponent';
-import { useSpring, config } from 'react-spring';
-import { PlanetImageArr,Images } from '../customHooks/useDefineConstants';
-
-import { useHistory } from 'react-router';
+import { PlanetImageArr } from '../customHooks/useDefineConstants';
+import { CustomButton } from '../components/common/CustomButton';
 import uuid from 'react-uuid';
 
 const SelectBots = () => {
-	const history = useHistory();
-	const [Planet1, Planet2, Planet3, Planet4,  Planet5, Planet6]=PlanetImageArr;
-	const { Minijet } = Images;
+	const [Planet1, Planet2, Planet3, Planet4] = PlanetImageArr;
 
-	const [isHover, setIshover] = useState(false);
-	const changePageOnClick = () => history.push('/selectbots');
-	const unAnimateJet = () => setIshover(false);
-	const animateJet = () => setIshover(true);
-
-	const jetAnimatedProp = useSpring({
-		transform: isHover ? 'translateX(6vw)' : 'translateX(-30vw)',
-		config: config.stiff,
-	});
-
-	const btnTextProp = useSpring({
-		opacity: isHover ? 0 : 1,
-		config: config.stiff,
-	});
 	const selectedPlanetDetails = [
 		{
 			imgName: Planet1,
@@ -121,10 +98,7 @@ const SelectBots = () => {
 					</BadgeWrapper>
 				))}
 			</SolarSystemWrapper>
-			<Button width="15vw" onMouseEnter={animateJet} onMouseLeave={unAnimateJet} onClick={changePageOnClick}>
-				<AnimatedMiniJet leftPos="0vh" style={jetAnimatedProp} src={Minijet} />
-				<ButtonText style={btnTextProp}>Mission Find Falcone</ButtonText>
-			</Button>
+			<CustomButton redirectPath="/selectbots" leftPos="0vh" width="15vw" TextForButton="Mission Find Falcone" />
 		</SelectedPlanetWrapper>
 	);
 };

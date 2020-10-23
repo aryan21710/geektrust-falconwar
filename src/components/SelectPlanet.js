@@ -22,7 +22,6 @@ import { useHistory } from 'react-router';
 import { createUpdatedPlanetData } from '../common/util.js';
 import { PlanetImageArr,Images } from '../customHooks/useDefineConstants';
 
-
 const SelectPlanet = () => {
 	const { planetCfg, setPlanetCfg } = useContext(PlanetDetailsContext);
 	const history = useHistory();

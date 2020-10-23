@@ -1,41 +1,20 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import {
 	Wrapper,
 	BadgeWrapper,
 	ImageWrapper,
 	ButtonWrapper,
 	Heading,
-	Button,
-	ButtonText,
-	AnimatedMiniJet,
 } from './common/StyledComponent';
 import { useFetchDataFromBackend } from '../customHooks/useFetchDataFromBackend';
 import { Images } from '../customHooks/useDefineConstants';
-import { useHistory } from 'react-router';
 import { PlanetDetailsContext } from '../context/appContext';
-import { useSpring, config } from 'react-spring';
 import { CustomButton } from '../components/common/CustomButton';
 
 const LandingPage = () => {
 	const { planetCfg, setPlanetCfg } = useContext(PlanetDetailsContext);
-	const { KingShan, Queen, Minijet } = Images;
-	const [isHover, setIshover] = useState(false);
+	const { KingShan, Queen } = Images;
 	useFetchDataFromBackend(planetCfg, setPlanetCfg);
-	const history = useHistory();
-	const jetAnimatedProp = useSpring({
-		transform: isHover ? 'translateX(6vw)' : 'translateX(-30vw)',
-		config: config.stiff,
-	});
-
-	const btnTextProp = useSpring({
-		opacity: isHover ? 0 : 1,
-		config: config.stiff,
-	});
-
-	const changePageOnClick = () => history.push('/selectplanets');
-	const animateJet = () => setIshover(true);
-	const unAnimateJet = () => setIshover(false);
-
 	return (
 		<React.Fragment>
 			<Wrapper>
