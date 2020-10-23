@@ -19,7 +19,6 @@ export const Wrapper = styled.div`
 	}
 `;
 
-
 export const HeaderWrapper = styled.div`
 	width: 100vw;
 	height: ${(props) => props.height || '10vh'};
@@ -51,7 +50,7 @@ export const BadgeWrapper = styled.div`
 	justify-content: center;
 	align-items: center;
 	flex-direction: ${(props) => props.flexDirection || 'row'};
-	height: ${props=>props.height || "75vh"};
+	height: ${(props) => props.height || '75vh'};
 	flex: 1;
 	z-index: 2;
 	@media (max-width: 768px) {
@@ -97,10 +96,10 @@ export const Button = styled.div`
 	outline: none;
 	cursor: pointer;
 	position: relative;
-	margin: ${props=>props.margin || "0 auto"};
+	margin: ${(props) => props.margin || '0 auto'};
 	border: 0px solid transparent;
 	overflow: hidden;
-	width: ${props=>props.width};
+	width: ${(props) => props.width};
 	background: linear-gradient(to bottom, #ffc810, #b43e00);
 	@media (max-width: 768px) {
 		padding: 0vh 2vw;
@@ -114,7 +113,6 @@ export const ButtonText = styled(animated.p)`
 	font-size: 1.2rem;
 	text-align: center;
 `;
-
 
 export const AnimatedJetWrapper = styled(animated.div)`
 	width: ${(props) => props.width || '20vw'};
@@ -134,8 +132,7 @@ export const AnimatedMiniJet = styled(animated.img)`
 	object-fit: cover;
 	position: absolute;
 	cursor: pointer;
-	left: ${props=>props.leftPos}
-
+	left: ${(props) => props.leftPos};
 `;
 
 export const SelectedPlanetWrapper = styled.div`
@@ -145,7 +142,7 @@ export const SelectedPlanetWrapper = styled.div`
 	padding: 0;
 	overflow: hidden;
 	display: flex;
-	justify-content: ${props=>props.justifyContent || "center"};
+	justify-content: ${(props) => props.justifyContent || 'center'};
 	align-items: center;
 	flex-direction: column;
 	@media (max-width: 768px) {
@@ -160,10 +157,11 @@ export const SolarSystemWrapper = styled.div`
 	justify-content: space-around;
 	align-items: center;
 	flex-direction: column;
-	width: ${props=>props.width || "80vw"};
-	flex-direction: ${props=>props.flexDirection || "column"};
-	height: ${props=>props.height || "50vh"};
+	width: ${(props) => props.width || '80vw'};
+	flex-direction: ${(props) => props.flexDirection || 'column'};
+	height: ${(props) => props.height || '50vh'};
 	z-index: 100;
+	border: 2px solid white;
 	@media (max-width: 768px) {
 		width: 100vw;
 		height: 40vh;
@@ -270,27 +268,26 @@ export const StaticWrapper = styled.div`
 	width: ${(props) => props.width || '25vw'};
 `;
 
-
-export const Select = styled.select `
-margin-top: 1.5vh;
-border-radius: 20px;
-padding: 0.5vh 1vw; 
-background: white;
-color: white;
-outline: none;
-display: block;
-font-size: 0.8rem;
-font-family: sans-serif;
-color: black;
-line-height: 1;
-box-sizing: border-box;
-border: 1px solid #aaa;
-box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
--moz-appearance: none;
--webkit-appearance: none;
-appearance: none;
-background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
-background-repeat: no-repeat, repeat;
-background-position: right 0.7em top 50%, 0 0;
-background-size: 0.65em auto, 100%;
+export const Select = styled.select`
+	margin-top: 1.5vh;
+	border-radius: 20px;
+	padding: 0.5vh 2vw;
+	background: white;
+	color: white;
+	outline: none;
+	display: block;
+	font-size: 0.8rem;
+	font-family: sans-serif;
+	color: black;
+	line-height: 1;
+	box-sizing: border-box;
+	border: 1px solid #aaa;
+	box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	appearance: none;
+	background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+	background-repeat: no-repeat, repeat;
+	background-position: right 0.7em top 50%, 0 0;
+	background-size: 0.65em auto, 100%;
 `;
