@@ -49,6 +49,7 @@ export const BadgeWrapper = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	justify-content: ${(props) => props.justifyContent || 'center'};
 	flex-direction: ${(props) => props.flexDirection || 'row'};
 	height: ${(props) => props.height || '75vh'};
 	flex: 1;
@@ -198,7 +199,10 @@ export const Planet = styled(animated.img)`
 export const PlanetWrapper = styled.div`
 	display: flex;
 	width: 100vw;
-	height: 25vh;
+	height: ${props=>props.height || "25vh"};
+	justify-content: ${props=>props.justifyContent || "center"};
+	flexDirection=> ${props=>props.flexDirection||"row"};
+	border: 2px solid red;
 	@media (max-width: 768px) {
 		width: 100vw;
 		height: 80vh;
