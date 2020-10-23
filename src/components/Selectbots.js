@@ -27,14 +27,14 @@ const SelectBots = () => {
 						<Heading color="#FAD107" fontSize="1.2rem">
 							{planetDetails.planetname}
 						</Heading>
-						<Heading color="#FAD107" fontSize="1rem">{`DISTANCE ${planetDetails.distance}`}</Heading>
+						<Heading color="#FAD107" fontSize="1rem">{`DISTANCE ${planetDetails.distance} megamiles`}</Heading>
 						<Select
 							name="planetName"
 							value={''}
 							// onChange={}
 						>
 							{vehicleData.map((bot, idx) => {
-								return idx === 0 ? (
+								return bot.name==="Choose A Space Vehicle" ? (
 									<option key={uuid()} selected value="planetName">
 										{bot.name}
 									</option>

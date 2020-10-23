@@ -58,6 +58,13 @@ const Approutes = () => {
 				name: vehicleData.name.toUpperCase(),
 				distance: vehicleData.distance,
 			}));
+
+			updatedVehData.unshift({
+				imgName: '',
+				name: 'Choose A Space Vehicle.',
+				distance: '',
+			});
+
 			console.log(`vehicleData ${vehicleData}`);
 			setPlanetCfg({ ...planetCfg, vehicleData: updatedVehData });
 		}
