@@ -10,32 +10,12 @@ import {
 import { PlanetImageArr } from '../customHooks/useDefineConstants';
 import { CustomButton } from '../components/common/CustomButton';
 import uuid from 'react-uuid';
+import { PlanetDetailsContext } from '../context/appContext';
 
 const SelectBots = () => {
 	const [Planet1, Planet2, Planet3, Planet4] = PlanetImageArr;
+	const { selectedPlanet } = useContext(PlanetDetailsContext);
 
-	const selectedPlanetDetails = [
-		{
-			imgName: Planet1,
-			planetName: 'Planet1',
-			distance: '100megamiles',
-		},
-		{
-			imgName: Planet2,
-			planetName: 'Planet1',
-			distance: '100megamiles',
-		},
-		{
-			imgName: Planet3,
-			planetName: 'Planet1',
-			distance: '100megamiles',
-		},
-		{
-			imgName: Planet4,
-			planetName: 'Planet1',
-			distance: '100megamiles',
-		},
-	];
 
 	const botDetails = [
 		{
@@ -71,11 +51,11 @@ const SelectBots = () => {
 				Choose Space Vehicles to Invade the Planets.
 			</Heading>
 			<SolarSystemWrapper height="70vh" width="100vw" flexDirection="row">
-				{selectedPlanetDetails.map((planetDetails) => (
+				{selectedPlanet.map((planetDetails) => (
 					<BadgeWrapper key={uuid()} height="50vh" flexDirection="column">
-						<SelectedPlanetImg imgname={planetDetails.imgName} />
+						<SelectedPlanetImg imgname={planetDetails.imgname} />
 						<Heading color="#FAD107" fontSize="1.2rem">
-							{planetDetails.planetName}
+							{planetDetails.planetname}
 						</Heading>
 						<Heading color="#FAD107" fontSize="1rem">{`DISTANCE ${planetDetails.distance}`}</Heading>
 						<Select

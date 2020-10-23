@@ -1,4 +1,4 @@
-export const createUpdatedPlanetData=(planetData,PlanetImageArr)=>{
+export const createPlanetCordToDisplay=(planetData,PlanetImageArr)=>{
     const [Planet1, Planet2, Planet3, Planet4,  Planet5, Planet6]=PlanetImageArr;
     return planetData
     .map((_) => {
