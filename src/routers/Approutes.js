@@ -4,7 +4,7 @@ import { PlanetDetailsContext } from '../context/appContext';
 import PropTypes from 'prop-types';
 import PrivateRoute from './PrivateRoute';
 import ErrorBoundary from '../components/common/ErrorBoundaryComp';
-import { PlanetImageArr } from '../customHooks/useDefineConstants';
+import { PlanetImageArr, SpaceBotImgArr } from '../customHooks/useDefineConstants';
 
 import { StarGrid } from '../components/common/StarGrid';
 
@@ -37,10 +37,7 @@ const Approutes = () => {
 		planetData: [],
 		vehicleData: [],
 	});
-
 	const [selecPlanetCnt, setSelecPlanetCount] = useState(0);
-
-
 	const [selectedPlanet, setSelectedPlanet] = useState(() =>
 		PlanetImageArr.map((planetImg) => ({
 			imgname: planetImg,
@@ -52,10 +49,18 @@ const Approutes = () => {
 		}))
 	);
 
-	const { token } = planetCfg;
+	const { token, vehicleData } = planetCfg;
 
 	useEffect(() => {
-		token.length > 0 && console.log(`API TOKEN ${token}`);
+		if (token.length > 0) {
+			const updatedVehData = vehicleData.map((vehicleData, idx) => ({
+				imgName: SpaceBotImgArr[idx],
+				name: vehicleData.name.toUpperCase(),
+				distance: vehicleData.distance,
+			}));
+			console.log(`vehicleData ${vehicleData}`);
+			setPlanetCfg({ ...planetCfg, vehicleData: updatedVehData });
+		}
 	}, [token]);
 
 	useEffect(() => {
@@ -75,7 +80,14 @@ const Approutes = () => {
 			<Switch>
 				<Suspense fallback={<div>Loading</div>}>
 					<PlanetDetailsContext.Provider
-						value={{ planetCfg, setPlanetCfg, setSelectedPlanet, selectedPlanet, selecPlanetCnt, setSelecPlanetCount }}
+						value={{
+							planetCfg,
+							setPlanetCfg,
+							setSelectedPlanet,
+							selectedPlanet,
+							selecPlanetCnt,
+							setSelecPlanetCount,
+						}}
 					>
 						<React.Fragment>
 							<aside className="starGridWrapper">

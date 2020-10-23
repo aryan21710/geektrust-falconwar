@@ -7,43 +7,13 @@ import {
 	Heading,
 	Select,
 } from './common/StyledComponent';
-import { PlanetImageArr } from '../customHooks/useDefineConstants';
 import { CustomButton } from '../components/common/CustomButton';
 import uuid from 'react-uuid';
 import { PlanetDetailsContext } from '../context/appContext';
 
 const SelectBots = () => {
-	const [Planet1, Planet2, Planet3, Planet4] = PlanetImageArr;
-	const { selectedPlanet } = useContext(PlanetDetailsContext);
-
-
-	const botDetails = [
-		{
-			imgName: '',
-			name: 'Choose Space Vehicle',
-			distance: '',
-		},
-		{
-			imgName: Planet1,
-			name: 'SPACE-BOT',
-			distance: '100megamiles',
-		},
-		{
-			imgName: Planet2,
-			name: 'SPACE-ROCKET',
-			distance: '100megamiles',
-		},
-		{
-			imgName: Planet3,
-			name: 'SPACE-SHIP',
-			distance: '100megamiles',
-		},
-		{
-			imgName: Planet4,
-			name: 'SPACE-SHUTTLE',
-			distance: '100megamiles',
-		},
-	];
+	const { selectedPlanet, planetCfg  } = useContext(PlanetDetailsContext);
+    const {vehicleData}=planetCfg
 
 	return (
 		<SelectedPlanetWrapper justifyContent="center">
@@ -63,7 +33,7 @@ const SelectBots = () => {
 							value={''}
 							// onChange={}
 						>
-							{botDetails.map((bot, idx) => {
+							{vehicleData.map((bot, idx) => {
 								return idx === 0 ? (
 									<option key={uuid()} selected value="planetName">
 										{bot.name}
