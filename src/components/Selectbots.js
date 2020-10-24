@@ -87,7 +87,7 @@ const SelectBots = () => {
 										src={planetDetails.vehicleNamesArray[0].imgName}
 									/>
 									<Heading fontSize="1rem" color="#FAD107">
-										{planetDetails.vehicleNamesArray[0].name}
+										{`Time Taken:- 100sec`}
 									</Heading>
 								</React.Fragment>
 							)}
