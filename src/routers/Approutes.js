@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import PrivateRoute from './PrivateRoute';
 import ErrorBoundary from '../components/common/ErrorBoundaryComp';
 import { PlanetImageArr, SpaceBotImgArr } from '../customHooks/useDefineConstants';
+import { useUpdatedPlanetAndBotsData } from '../customHooks/useUpdatedPlanetAndBotsData';
 
 import { StarGrid } from '../components/common/StarGrid';
 
@@ -50,7 +51,6 @@ const Approutes = () => {
 	);
 
 	const { token, vehicleData } = planetCfg;
-
 	useEffect(() => {
 		if (token.length > 0) {
 			const updatedVehData = vehicleData.map((vehicleData, idx) => ({
@@ -67,20 +67,14 @@ const Approutes = () => {
 
 			console.log(`vehicleData ${vehicleData}`);
 			setPlanetCfg({ ...planetCfg, vehicleData: updatedVehData });
+			localStorage.setItem('planetCfg', JSON.stringify(updatedVehData));
+
 		}
 	}, [token]);
 
-	useEffect(() => {
-		if (selecPlanetCnt === 4) {
-			const filteredSelPlanetData = selectedPlanet.filter(
-				(planetDetails) => planetDetails.planetname !== '' && planetDetails.distance !== ''
-			);
 
-			console.log(`filteredSelPlanetData ${filteredSelPlanetData}`);
 
-			setSelectedPlanet(filteredSelPlanetData);
-		}
-	}, [selecPlanetCnt]);
+	useUpdatedPlanetAndBotsData(selecPlanetCnt, selectedPlanet, setSelectedPlanet);
 
 	return (
 		<DebugRouter>

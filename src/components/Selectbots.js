@@ -13,8 +13,14 @@ import uuid from 'react-uuid';
 import { PlanetDetailsContext } from '../context/appContext';
 
 const SelectBots = () => {
-	const { selectedPlanet, planetCfg } = useContext(PlanetDetailsContext);
-	const { vehicleData } = planetCfg;
+	const { selectedPlanet } = useContext(PlanetDetailsContext);
+
+	const vehicleData  = JSON.parse(localStorage.getItem('planetCfg'));
+
+	console.log(`vehicleData ${JSON.stringify(vehicleData, null, 4)}`);
+	const filteredSelPlanetData =
+		selectedPlanet.length === 6 ? JSON.parse(localStorage.getItem('selectedPlanet')) : selectedPlanet;
+
 	const [selectedVehicle, setSelectedVehicle] = useState('');
 	const onSelectedVehicle = (e) => setSelectedVehicle(e.target.value);
 
@@ -29,7 +35,7 @@ const SelectBots = () => {
 			</Heading>
 			<SolarSystemWrapper height="60vh" width="100vw" flexDirection="column">
 				<PlanetWrapper justifyContent="flex-start" flexDirection="row" height="25vh">
-					{selectedPlanet.map((planetDetails) => (
+					{filteredSelPlanetData.map((planetDetails) => (
 						<BadgeWrapper justifyContent="center" key={uuid()} height="30vh" flexDirection="column">
 							<SelectedPlanetImg imgname={planetDetails.imgname} />
 							<Heading color="#FAD107" fontSize="1.2rem">
