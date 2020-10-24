@@ -56,10 +56,9 @@ const Approutes = () => {
 			const updatedVehData = vehicleData.map((vehicleData, idx) => ({
 				imgName: SpaceBotImgArr[idx],
 				name: vehicleData.name.toUpperCase(),
-				distance: vehicleData.distance,
+				distance: vehicleData.max_distance,
+				speed: vehicleData.speed
 			}));
-
-			console.log(`vehicleData ${vehicleData}`);
 			setPlanetCfg({ ...planetCfg, vehicleData: updatedVehData });
 			localStorage.setItem('planetCfg', JSON.stringify(updatedVehData));
 
