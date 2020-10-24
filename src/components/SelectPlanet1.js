@@ -86,7 +86,6 @@ const SelectPlanet1 = () => {
 			}
 		});
 
-	console.log(`updatedPlanetData ${planetData.length} :: ${JSON.stringify(updatedPlanetData)}`);
 
 	return (
 		<React.Fragment>

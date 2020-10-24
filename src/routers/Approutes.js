@@ -59,12 +59,6 @@ const Approutes = () => {
 				distance: vehicleData.distance,
 			}));
 
-			updatedVehData.unshift({
-				imgName: '',
-				name: 'Choose A Space Vehicle.',
-				distance: '',
-			});
-
 			console.log(`vehicleData ${vehicleData}`);
 			setPlanetCfg({ ...planetCfg, vehicleData: updatedVehData });
 			localStorage.setItem('planetCfg', JSON.stringify(updatedVehData));
