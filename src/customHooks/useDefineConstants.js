@@ -7,10 +7,10 @@ import Planet6 from '../public/images/6.png';
 import KingShan from '../public/images/modiji.png';
 import Queen from '../public/images/xi jhi.png';
 import Minijet from '../public/images/minijet.png';
-import Spacebot1 from '../public/images/Spaceship1.png';
-import Spacebot2 from '../public/images/spaceship2.png';
-import Spacebot3 from '../public/images/Spaceship3.png';
-import Spacebot4 from '../public/images/spaceship4.png';
+import SpaceRocket from '../public/images/Spaceship1.png';
+import SpacePod from '../public/images/spaceship2.png';
+import SpaceShip from '../public/images/Spaceship3.png';
+import SpaceShuttle from '../public/images/spaceship4.png';
 
 
 export const PlanetImageArr = [Planet1, Planet2, Planet3, Planet4, Planet5, Planet6];
@@ -21,4 +21,4 @@ export const Images= {
     Minijet
 }
 
-export const SpaceBotImgArr=[Spacebot1,Spacebot2,Spacebot3,Spacebot4];
+export const SpaceBotImgArr=[SpacePod,SpaceRocket,SpaceShuttle,SpaceShip];

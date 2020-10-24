@@ -52,7 +52,8 @@ export const BadgeWrapper = styled.div`
 	justify-content: ${(props) => props.justifyContent || 'center'};
 	flex-direction: ${(props) => props.flexDirection || 'row'};
 	height: ${(props) => props.height || '75vh'};
-	flex: 1;
+	width: ${(props) => props.width || '25vw'};
+	flex: ${(props) => props.flex || '1'};
 	z-index: 2;
 	@media (max-width: 768px) {
 		width: 100vw;
@@ -162,7 +163,6 @@ export const SolarSystemWrapper = styled.div`
 	flex-direction: ${(props) => props.flexDirection || 'column'};
 	height: ${(props) => props.height || '50vh'};
 	z-index: 100;
-	border: 2px solid white;
 	@media (max-width: 768px) {
 		width: 100vw;
 		height: 40vh;
@@ -202,7 +202,6 @@ export const PlanetWrapper = styled.div`
 	height: ${props=>props.height || "25vh"};
 	justify-content: ${props=>props.justifyContent || "center"};
 	flexDirection=> ${props=>props.flexDirection||"row"};
-	border: 2px solid red;
 	@media (max-width: 768px) {
 		width: 100vw;
 		height: 80vh;
@@ -273,7 +272,7 @@ export const StaticWrapper = styled.div`
 `;
 
 export const Select = styled.select`
-	margin-top: 1.5vh;
+	margin: 1.5vh 0 5vh 0;
 	border-radius: 20px;
 	padding: 0.5vh 2vw;
 	background: white;
