@@ -16,9 +16,10 @@ import { PlanetDetailsContext } from '../context/appContext';
 const SelectBots = () => {
 	const { selectedPlanet } = useContext(PlanetDetailsContext);
 	const vehicleData = JSON.parse(localStorage.getItem('planetCfg'));
-	const [dropDownIndex, setDropDownIndex] = useState([]);
+	const [dropDownIndex, setDropDownIndex] = useState(-1);
 	const [selectedVehicle, setSelectedVehicle] = useState('');
 	const [travelTime, setTravelTime] = useState(0);
+	const [error,setError]=useState("");
 	const [vehicleToPlanetMap, setVehicleToPlanetMap] = useState(() => {
 		const _ = selectedPlanet.length === 6 ? JSON.parse(localStorage.getItem('selectedPlanet')) : selectedPlanet;
 		console.log(`vehicleData ${JSON.stringify(vehicleData)}`);
@@ -29,31 +30,45 @@ const SelectBots = () => {
 				imgName: data.imgName,
 				distance: data.distance,
 				speed: data.speed,
+				travelTime: 0
 			})),
 		}));
 	});
 
 	const calculateTimeTravel = (dropDownIndex) => {
+		const temp=[];
+		const _=[];
+
 		for (let overallData of vehicleToPlanetMap) {
-			if (dropDownIndex.includes(vehicleToPlanetMap.indexOf(overallData))) {
+			if (vehicleToPlanetMap.indexOf(overallData)===dropDownIndex) {
 				const distanceToPlanet = parseInt(overallData.distance);
 				for (let vehicleData of overallData.vehicleNamesArray) {
 					if (vehicleData.name === selectedVehicle) {
 						if (distanceToPlanet > vehicleData.distance) {
-							alert(`OOPS ${vehicleData.name} CANNOT TRAVEL TO ${overallData.planetname.toUpperCase()} `);
-							break;
+							_.push({...vehicleData});
+							alert(`OOPS ${vehicleData.name} CANNOT TRAVEL TO ${overallData.planetname.toUpperCase()} `)
+
 						} else {
 							setTravelTime(Math.round(distanceToPlanet / parseInt(vehicleData.speed)));
+							_.push({...vehicleData,travelTime: Math.round(distanceToPlanet / parseInt(vehicleData.speed))});
 						}
+					} else {
+						_.push({...vehicleData});
 					}
 				}
+				temp.push({...overallData,vehicleNamesArray: _});
+			} else {
+				temp.push(overallData)
 			}
+
 		}
+		console.log(`temp ${JSON.stringify(temp,null,4)}`)
+		setVehicleToPlanetMap(temp)
+
 	};
 
 
-	
-
+	// 	alert(`OOPS ${vehicleData.name} CANNOT TRAVEL TO ${overallData.planetname.toUpperCase()} `);
 	useEffect(() => {
 		if (selectedVehicle.length > 0)  {
 			calculateTimeTravel(dropDownIndex);
@@ -82,7 +97,7 @@ const SelectBots = () => {
 		});
 		setSelectedVehicle(e.target.value);
 		setVehicleToPlanetMap(sortedVehicleNamesArray);
-		!dropDownIndex.includes(dropDownSelIndex) && setDropDownIndex([...dropDownIndex, dropDownSelIndex]);
+		setDropDownIndex(dropDownSelIndex);
 	};
 
 	return (
@@ -103,7 +118,7 @@ const SelectBots = () => {
 								fontSize="1rem"
 							>{`DISTANCE ${planetDetails.distance} megamiles`}</Heading>
 							<Select name="planetName" onChange={onSelectedVehicleIdx}>
-								{!dropDownIndex.includes(idx) && (
+								{dropDownIndex!==idx && (
 									<option key={uuid()} selected value="Choose A Space Vehicle">
 										Choose A Space Vehicle
 									</option>
@@ -114,7 +129,7 @@ const SelectBots = () => {
 									</option>
 								))}
 							</Select>
-							{dropDownIndex.includes(idx) && travelTime > 0 && (
+							{planetDetails.vehicleNamesArray[0].travelTime > 0 && (
 								<React.Fragment>
 									<ImageWrapper
 										rotateBy="25deg"

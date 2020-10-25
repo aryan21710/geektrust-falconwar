@@ -127,7 +127,7 @@ const SelectPlanet = () => {
 		}
 	};
 
-	console.log(`updatedPlanetData ${planetData.length} :: ${JSON.stringify(updatedPlanetData)}`);
+	// console.log(`updatedPlanetData ${planetData.length} :: ${JSON.stringify(updatedPlanetData)}`);
 
 	const conditionForAnimation = (_) => _.index >= 0;
 
