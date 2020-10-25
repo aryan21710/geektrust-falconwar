@@ -70,13 +70,13 @@ const SelectBots = () => {
 
 	// 	alert(`OOPS ${vehicleData.name} CANNOT TRAVEL TO ${overallData.planetname.toUpperCase()} `);
 	useEffect(() => {
-		if (selectedVehicle.length > 0)  {
+		if (selectedVehicle.length > 0 && dropDownIndex > -1)  {
 			calculateTimeTravel(dropDownIndex);
 		} else {
 			setTravelTime(0);
 			setSelectedVehicle("")
 		}
-	}, [selectedVehicle]);
+	}, [selectedVehicle,dropDownIndex]);
 
 
 
@@ -118,7 +118,7 @@ const SelectBots = () => {
 								fontSize="1rem"
 							>{`DISTANCE ${planetDetails.distance} megamiles`}</Heading>
 							<Select name="planetName" onChange={onSelectedVehicleIdx}>
-								{dropDownIndex!==idx && (
+								{dropDownIndex!==idx && planetDetails.vehicleNamesArray[0].travelTime === 0 && (
 									<option key={uuid()} selected value="Choose A Space Vehicle">
 										Choose A Space Vehicle
 									</option>
@@ -141,7 +141,7 @@ const SelectBots = () => {
 										src={planetDetails.vehicleNamesArray[0].imgName}
 									/>
 									<Heading fontSize="1rem" color="#FAD107">
-										{`Time Taken:- ${travelTime}`}
+										{`Time Taken:- ${planetDetails.vehicleNamesArray[0].travelTime}`}
 									</Heading>
 								</React.Fragment>
 							)}
