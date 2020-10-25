@@ -24,7 +24,7 @@ const DisplayAllSpaceVehicles = () => {
 							marginBottom="3vh"
 							src={Spacebot1}
 						/>
-						<Heading fontSize="1rem" color="#FAD107">
+						<Heading fontSize="1.2rem" color="#FAD107">
 							SPACE ROCKET
 						</Heading>
 						<Heading fontSize="0.8rem" color="white">
