@@ -35,7 +35,7 @@ const LandingPage = () => {
 						Queen Al Falcone is now in hiding. But if King Shan can find her before the years are up, she
 						will be exiled for another 15 years…
 					</Heading>
-					<CustomButton redirectPath="/selectplanets" leftPos="0vh" TextForButton="Lets Find Falcone" />
+					<CustomButton redirectPath="/selectplanets" leftpos="0vh" TextForButton="Lets Find Falcone" />
 				</ButtonWrapper>
 			</Wrapper>
 		</React.Fragment>

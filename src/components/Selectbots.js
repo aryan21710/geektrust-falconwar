@@ -21,7 +21,6 @@ const SelectBots = () => {
 	const [error,setError]=useState("");
 	const [planetAndBotsData, setPlanetAndBotsData] = useState(() => {
 		const filteredArrOfSelectedPlanet = selectedPlanet.length === 6 ? JSON.parse(localStorage.getItem('selectedPlanet')) : selectedPlanet;
-		console.log(`vehicleData ${JSON.stringify(vehicleData)}`);
 		return filteredArrOfSelectedPlanet.map((data, idx) => ({
 			...data,
 			vehicleNamesArray: vehicleData.map((data) => ({
@@ -29,7 +28,8 @@ const SelectBots = () => {
 				imgName: data.imgName,
 				distance: data.distance,
 				speed: data.speed,
-				travelTime: 0
+				travelTime: 0,
+				totalUnits: vehicleData.total_no
 			})),
 		}));
 	});
@@ -57,7 +57,6 @@ const SelectBots = () => {
 				updatedPlanetAndBotsData.push(overallData)
 			}
 		}
-		console.log(`updatedPlanetAndBotsData ${JSON.stringify(updatedPlanetAndBotsData,null,4)}`)
 		setPlanetAndBotsData(updatedPlanetAndBotsData)
 	};
 
@@ -109,7 +108,7 @@ const SelectBots = () => {
 							>{`DISTANCE ${distance} megamiles`}</Heading>
 							<Select name="planetName" onChange={onSelectedVehicleIdx}>
 								{dropDownIndex!==idx && vehicleNamesArray[0].travelTime === 0 && (
-									<option key={uuid()} selected value="Choose A Space Vehicle">
+									<option key={uuid()} defaultValue="Choose A Space Vehicle">
 										Choose A Space Vehicle
 									</option>
 								)}
@@ -139,7 +138,7 @@ const SelectBots = () => {
 					))}
 				</PlanetWrapper>
 			</SolarSystemWrapper>
-			<CustomButton redirectPath="/selectbots" leftPos="0vh" width="15vw" TextForButton="Mission Find Falcone" />
+			<CustomButton redirectPath="/selectbots" leftpos="0vh" width="15vw" TextForButton="Mission Find Falcone" />
 		</SelectedPlanetWrapper>
 	);
 };

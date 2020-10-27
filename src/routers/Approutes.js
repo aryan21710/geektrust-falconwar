@@ -1,9 +1,6 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { PlanetDetailsContext } from '../context/appContext';
-import PropTypes from 'prop-types';
-import PrivateRoute from './PrivateRoute';
-import ErrorBoundary from '../components/common/ErrorBoundaryComp';
 import { PlanetImageArr, SpaceBotImgArr } from '../customHooks/useDefineConstants';
 import { useUpdatedPlanetAndBotsData } from '../customHooks/useUpdatedPlanetAndBotsData';
 
@@ -20,7 +17,6 @@ const DisplayAllSpaceVehicles = lazy(() => import('../components/DisplayAllSpace
 class DebugRouter extends Router {
 	constructor(props) {
 		super(props);
-		console.log('initial history is: ', JSON.stringify(this.history, null, 2));
 		this.history.listen((location, action) => {
 			console.log(`The current URL is ${location.pathname}`);
 			console.log(
@@ -57,7 +53,8 @@ const Approutes = () => {
 				imgName: SpaceBotImgArr[idx],
 				name: vehicleData.name.toUpperCase(),
 				distance: vehicleData.max_distance,
-				speed: vehicleData.speed
+				speed: vehicleData.speed,
+				totalUnits: vehicleData.total_no
 			}));
 			setPlanetCfg({ ...planetCfg, vehicleData: updatedVehData });
 			localStorage.setItem('planetCfg', JSON.stringify(updatedVehData));

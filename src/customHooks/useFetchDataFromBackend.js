@@ -15,7 +15,6 @@ export const useFetchDataFromBackend = async (planetCfg, setPlanetCfg) => {
 			});
 
 			const planetData = planetApiResponse?.data;
-			console.log(`axios planetApiResponse ${JSON.stringify(planetData)}`);
 
 			const vehicleApiResponse = await axios(VehicleUrl, {
 				method: 'GET',
@@ -27,7 +26,6 @@ export const useFetchDataFromBackend = async (planetCfg, setPlanetCfg) => {
 			});
 
 			const vehicleData = vehicleApiResponse?.data;
-			console.log(`axios vehicleApiResponse ${JSON.stringify(vehicleData)}`);
 
 			const tokenApiResponse = await axios(TokenUrl, {
 				method: 'POST',
@@ -43,14 +41,12 @@ export const useFetchDataFromBackend = async (planetCfg, setPlanetCfg) => {
 			});
 
 			const token = tokenApiResponse?.data?.token;
-			console.log(`axios tokenApiResponse ${JSON.stringify(token)}`);
 			if (token && planetData && vehicleData) {
 				setPlanetCfg({ ...planetCfg, token, planetData, vehicleData });
 			} else {
 				setPlanetCfg({ ...planetCfg, apiError: 'ERROR WHILE FETCHING DATA FROM THE BACKEND' });
 			}
 		} catch (err) {
-			console.log(`axios error ${JSON.stringify(err)}`);
 			if (err?.response?.data) {
 				setPlanetCfg({ ...planetCfg, apiError: err.response.data });
 			} else {

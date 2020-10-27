@@ -127,7 +127,6 @@ const SelectPlanet = () => {
 		}
 	};
 
-	// console.log(`updatedPlanetData ${planetData.length} :: ${JSON.stringify(updatedPlanetData)}`);
 
 	const conditionForAnimation = (_) => _.index >= 0;
 
@@ -154,7 +153,7 @@ const SelectPlanet = () => {
 									key={uuid()}
 									onClick={animateSelectedPlanet}
 									toppos={_.topPos}
-									leftpos={_.leftPos}
+									leftpos={_.leftpos}
 									data-imgname={_.imgName}
 									data-planetname={_.planetname}
 									data-distance={_.distance}
@@ -170,7 +169,7 @@ const SelectPlanet = () => {
 						{selectedPlanet.map((_, idx) => {
 							if (conditionForAnimation(_) && _.animated) {
 								return (
-									<StaticWrapper width={idx === 4 || idx === 5 ? '0vw' : '25vw'}>
+									<StaticWrapper key={uuid()} width={idx === 4 || idx === 5 ? '0vw' : '25vw'}>
 										<AnimatedWrapper>
 											<Heading fontSize="1.3rem">{`Selected Planet - ${idx + 1}`}</Heading>
 											<SelectedPlanetImg imgname={_.imgname} />
@@ -186,8 +185,8 @@ const SelectPlanet = () => {
 								);
 							} else if (!_.animated && conditionForAnimation(_)) {
 								return (
-									<StaticWrapper width={idx === 4 || idx === 5 ? '0vw' : '25vw'}>
-										<UnAnimatedWrapper leftPos="0vw">
+									<StaticWrapper key={uuid()} width={idx === 4 || idx === 5 ? '0vw' : '25vw'}>
+										<UnAnimatedWrapper leftpos="0vw">
 											<Heading fontSize="1.3rem">{`Selected Planet - ${idx + 1}`}</Heading>
 											<SelectedPlanetImg imgname={_.imgname} />
 											<Heading color="#FAD107" fontSize="1.2rem">
@@ -202,7 +201,7 @@ const SelectPlanet = () => {
 								);
 							} else {
 								return (
-									<StaticWrapper width={idx === 4 || idx === 5 ? '0vw' : '25vw'}>
+									<StaticWrapper key={uuid()} width={idx === 4 || idx === 5 ? '0vw' : '25vw'}>
 										<UnAnimatedWrapper>
 											<Heading fontSize="1.3rem">{`Selected Planet - ${idx + 1}`}</Heading>
 											<SelectedPlanetImg imgname={_.imgname} />

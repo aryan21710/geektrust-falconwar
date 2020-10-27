@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Wrapper, BadgeWrapper, ImageWrapper, Heading, SolarSystemWrapper } from './common/StyledComponent';
 
 import { SpaceBotImgArr } from '../customHooks/useDefineConstants';
@@ -107,7 +107,7 @@ const DisplayAllSpaceVehicles = () => {
 						</Heading>
 					</BadgeWrapper>
 				</SolarSystemWrapper>
-				<CustomButton redirectPath="/selectbots" leftPos="0vh" TextForButton="Select Space Bots" width="15vw" />
+				<CustomButton redirectPath="/selectbots" leftpos="0vh" TextForButton="Select Space Bots" width="15vw" />
 			</Wrapper>
 		</React.Fragment>
 	);

@@ -134,7 +134,7 @@ export const AnimatedMiniJet = styled(animated.img)`
 	object-fit: cover;
 	position: absolute;
 	cursor: pointer;
-	left: ${(props) => props.leftPos};
+	left: ${(props) => props.leftpos};
 `;
 
 export const SelectedPlanetWrapper = styled.div`
@@ -253,7 +253,7 @@ export const UnAnimatedWrapper = styled.div`
 	width: 100%;
 	flex: 1;
 	position: absolute;
-	left: ${(props) => props.leftPos || '-30vw'};
+	left: ${(props) => props.leftpos || '-30vw'};
 	align-items: center;
 	flex-direction: column;
 	@media (max-width: 768px) {
