@@ -12,12 +12,14 @@ import {
 import { CustomButton } from '../components/common/CustomButton';
 import uuid from 'react-uuid';
 import { PlanetDetailsContext } from '../context/appContext';
+import { useHistory } from 'react-router';
 
 const SelectBots = () => {
-	const { selectedPlanet } = useContext(PlanetDetailsContext);
+	const { selectedPlanet, setFinalData, finalData } = useContext(PlanetDetailsContext);
 	const [selectedPlanetIndex, setSelectedPlanetIndex] = useState(-1);
 	const [selectedVehicle, setSelectedVehicle] = useState('');
 	const [planetAndBotsData, setPlanetAndBotsData] = useState([]);
+	const history = useHistory();
 
 	useEffect(() => {
 		setPlanetAndBotsData(populatePlanetAndBotsData());
@@ -25,11 +27,10 @@ const SelectBots = () => {
 
 	const populatePlanetAndBotsData = () => {
 		const filteredArrOfSelectedPlanet =
-			selectedPlanet.length === 6 ? 
-			JSON.parse(localStorage.getItem('selectedPlanet')) 
-			: selectedPlanet;
+			selectedPlanet.length === 6 ? JSON.parse(localStorage.getItem('selectedPlanet')) : selectedPlanet;
 		return filteredArrOfSelectedPlanet.map((data) => ({
 			...data,
+			finalStatus: false,
 			vehicleDataArray: JSON.parse(localStorage.getItem('planetCfg')).map((data) => ({
 				name: data.name,
 				botImageName: data.imgName,
@@ -50,7 +51,9 @@ const SelectBots = () => {
 	}, [selectedVehicle, selectedPlanetIndex]);
 
 	const calcTimeTravelAndBotsLeft = () => {
-		let error=false;
+		let error = false;
+		let planetName = '';
+		let vehicleName = '';
 		const updatedPlanetAndBotsData = planetAndBotsData
 			.map((planetData, idx) => {
 				if (idx === selectedPlanetIndex) {
@@ -64,26 +67,27 @@ const SelectBots = () => {
 				} else {
 					return { ...planetData };
 				}
-			}).map((planetData, idx) => {
+			})
+			.map((planetData, idx) => {
 				const { vehicleDataArray } = planetData;
 				const distanceToPlanet = parseInt(planetData.distance);
 				if (idx === selectedPlanetIndex) {
 					const temp = vehicleDataArray.map((vehicleData) => {
 						if (vehicleData.name === selectedVehicle) {
 							if (distanceToPlanet > vehicleData.distance) {
-								alert(
-									`OOPS!! YOU CANNOT TRAVEL TO ${planetData.planetname} USING ${vehicleData.name}`
-								);
-								error=true;
+								alert(`OOPS!! YOU CANNOT TRAVEL TO ${planetData.planetname} USING ${vehicleData.name}`);
+								error = true;
 								return { ...vehicleData };
 							} else {
 								if (vehicleData.totalUnits === 0) {
-									error=true;
+									error = true;
 									alert(
 										`OOPS!! YOU RAN OUT OF ${vehicleData.name}. PLEASE USE SOME OTHER BOT FOR INVASION.`
 									);
-									return {...vehicleData}
+									return { ...vehicleData };
 								} else {
+									planetName = planetData.planetname;
+									vehicleName = vehicleData.name;
 									return {
 										...vehicleData,
 										travelTime: Math.round(distanceToPlanet / parseInt(vehicleData.speed)),
@@ -100,18 +104,30 @@ const SelectBots = () => {
 						...planetData,
 					};
 				}
-			}).map((planetData) => {
-				const { vehicleDataArray } = planetData;
-				return {...planetData, vehicleDataArray: vehicleDataArray.map((vehicleData) => {
-					return {
-						...vehicleData,
-						totalUnits: vehicleData.name === selectedVehicle && vehicleData.totalUnits > 0 && !error
-						? vehicleData.totalUnits - 1
-						: vehicleData.totalUnits
-					}
-				})}
 			})
+			.map((planetData) => {
+				const { vehicleDataArray } = planetData;
+				return {
+					...planetData,
+					vehicleDataArray: vehicleDataArray.map((vehicleData) => {
+						return {
+							...vehicleData,
+							totalUnits:
+								vehicleData.name === selectedVehicle && vehicleData.totalUnits > 0 && !error
+									? vehicleData.totalUnits - 1
+									: vehicleData.totalUnits,
+						};
+					}),
+				};
+			});
 		setPlanetAndBotsData(updatedPlanetAndBotsData);
+		setFinalData({
+			...finalData,
+			token: finalData?.token ? finalData.token : localStorage.getItem('token'),
+			planet_names: planetName.length > 0 ? [...finalData.planet_names, planetName] : [...finalData.planet_names],
+			vehicle_names:
+				vehicleName.length > 0 ? [...finalData.vehicle_names, vehicleName] : [...finalData.vehicle_names],
+		});
 	};
 
 	const onSelectedVehicleIdx = (e) => {
@@ -143,7 +159,7 @@ const SelectBots = () => {
 								)}
 								{vehicleDataArray.map((bot) => (
 									<option key={uuid()} data-index={idx} value={bot.name}>
-										{`${bot.name} (${bot.totalUnits})`} 
+										{`${bot.name} (${bot.totalUnits})`}
 									</option>
 								))}
 							</Select>
@@ -161,14 +177,19 @@ const SelectBots = () => {
 									<Heading fontSize="1rem" color="#FAD107">
 										{`Time Taken:- ${vehicleDataArray[0].travelTime}`}
 									</Heading>
-						
 								</React.Fragment>
 							)}
 						</BadgeWrapper>
 					))}
 				</PlanetWrapper>
 			</SolarSystemWrapper>
-			<CustomButton redirectPath="/selectbots" leftpos="0vh" width="15vw" TextForButton="Mission Find Falcone" />
+			<CustomButton
+				redirectPath="/displayfinalresult"
+				disabled={finalData.planet_names.length === 4 ? false : true}
+				leftpos="0vh"
+				width="15vw"
+				TextForButton="Mission Find Falcone"
+			/>
 		</SelectedPlanetWrapper>
 	);
 };

@@ -5,11 +5,11 @@ import { useSpring, config } from 'react-spring';
 import { Images } from '../../customHooks/useDefineConstants';
 
 export const CustomButton = (props) => {
-	const { redirectPath, leftpos, TextForButton, width } = props;
+	const { redirectPath, leftpos, TextForButton, width, disabled } = props;
 	const [isHover, setIshover] = useState(false);
 	const animateJet = () => setIshover(true);
 	const unAnimateJet = () => setIshover(false);
-	const changePageOnClick = () => history.push(`${redirectPath}`);
+	const changePageOnClick = () => !disabled && history.push(`${redirectPath}`);
 	const history = useHistory();
 	const { Minijet } = Images;
 
@@ -25,7 +25,13 @@ export const CustomButton = (props) => {
 
 	return (
 		<React.Fragment>
-			<Button width={width} onMouseEnter={animateJet} onMouseLeave={unAnimateJet} onClick={changePageOnClick}>
+			<Button
+				disabled={disabled}
+				width={width}
+				onMouseEnter={animateJet}
+				onMouseLeave={unAnimateJet}
+				onClick={changePageOnClick}
+			>
 				<AnimatedMiniJet leftpos={leftpos} style={jetAnimatedProp} src={Minijet} />
 				<ButtonText style={btnTextProp}>{TextForButton}</ButtonText>
 			</Button>

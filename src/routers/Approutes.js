@@ -13,6 +13,7 @@ const Footer = lazy(() => import('../components/common/Footer'));
 const SelectPlanet = lazy(() => import('../components/SelectPlanet'));
 const SelectBots = lazy(() => import('../components/Selectbots'));
 const DisplayAllSpaceVehicles = lazy(() => import('../components/DisplayAllSpaceVehicles'));
+const DisplayFinalResult = lazy(() => import('../components/DisplayFinalResult'));
 
 class DebugRouter extends Router {
 	constructor(props) {
@@ -46,6 +47,11 @@ const Approutes = () => {
 		}))
 	);
 
+	const [finalData, setFinalData]=useState({
+			planet_names: [],
+			vehicle_names: [],
+	})
+
 	const { token, vehicleData } = planetCfg;
 	useEffect(() => {
 		if (token.length > 0) {
@@ -54,15 +60,15 @@ const Approutes = () => {
 				name: vehicleData.name.toUpperCase(),
 				distance: vehicleData.max_distance,
 				speed: vehicleData.speed,
-				totalUnits: vehicleData.total_no
+				totalUnits: vehicleData.total_no,
 			}));
 			setPlanetCfg({ ...planetCfg, vehicleData: updatedVehData });
+			setFinalData({...finalData,token})
 			localStorage.setItem('planetCfg', JSON.stringify(updatedVehData));
+			localStorage.setItem('token', token);
 
 		}
 	}, [token]);
-
-
 
 	useUpdatedPlanetAndBotsData(selecPlanetCnt, selectedPlanet, setSelectedPlanet);
 
@@ -78,6 +84,8 @@ const Approutes = () => {
 							selectedPlanet,
 							selecPlanetCnt,
 							setSelecPlanetCount,
+							finalData,
+							setFinalData
 						}}
 					>
 						<React.Fragment>
@@ -94,6 +102,8 @@ const Approutes = () => {
 								strict
 								component={DisplayAllSpaceVehicles}
 							/>
+							<Route path={`/displayfinalresult`} exact={true} strict component={DisplayFinalResult} />
+
 							<Footer />
 						</React.Fragment>
 					</PlanetDetailsContext.Provider>
