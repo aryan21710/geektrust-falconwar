@@ -6,22 +6,29 @@ import { usePostDataToFetchResult } from '../customHooks/usePostDataToFetchResul
 const DisplayFinalResult = () => {
 	const { finalData } = useContext(PlanetDetailsContext);
 	const [backendResponse, setBackendResponse] = useState({});
-	const [status, setStatus] = useState(false);
+    const [status, setStatus] = useState(false);
+    const [error, setError] = useState({});
+    const [displayMessage, setDisplayMessage] = useState("");
 
-	usePostDataToFetchResult(finalData, setBackendResponse, backendResponse);
+
+
+	usePostDataToFetchResult(finalData, setBackendResponse, backendResponse,setError,error);
 
 	useEffect(() => {
 		if (Object.keys(backendResponse).length > 0) {
-			const { status } = backendResponse;
+            const { status } = backendResponse;
+            status ? setDisplayMessage('PASSED') :  setDisplayMessage('FAILED')
 			setStatus(status);
-		}
-	}, [backendResponse]);
+		} else if (Object.keys(error).length > 0) {
+            setDisplayMessage(error.response.statusText)
+        }
+	}, [backendResponse,error]);
 
 	return (
 		<React.Fragment>
 			<SelectedPlanetWrapper>
 				<Heading color="#FAD107" fontSize="1.2rem" fontFamily="Avenir">
-					{status ? status : 'NO RESULT YET'}
+					{displayMessage.length > 0 ? displayMessage : 'SOMETHING WRONG'}
 				</Heading>
 			</SelectedPlanetWrapper>
 		</React.Fragment>
