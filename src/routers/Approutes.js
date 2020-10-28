@@ -3,10 +3,9 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { PlanetDetailsContext } from '../context/appContext';
 import { PlanetImageArr, SpaceBotImgArr } from '../customHooks/useDefineConstants';
 import { useUpdatedPlanetAndBotsData } from '../customHooks/useUpdatedPlanetAndBotsData';
-
 import { StarGrid } from '../components/common/StarGrid';
 
-// *** LAZY LOAD ALL COMPONENTS STARTS ***
+// *** LAZY LOAD ALL COMPONENTS FOR FASTER PAGE LOAD ***
 const LandingPage = lazy(() => import('../components/LandingPage'));
 const Header = lazy(() => import('../components/common/Header'));
 const Footer = lazy(() => import('../components/common/Footer'));
@@ -31,28 +30,28 @@ class DebugRouter extends Router {
 const Approutes = () => {
 	const [planetCfg, setPlanetCfg] = useState({
 		token: '',
-		apiError: '',
 		planetData: [],
 		vehicleData: [],
 	});
+	const { token, vehicleData } = planetCfg;
+
 	const [selecPlanetCnt, setSelecPlanetCount] = useState(0);
 	const [selectedPlanet, setSelectedPlanet] = useState(() =>
 		PlanetImageArr.map((planetImg) => ({
 			imgname: planetImg,
 			planetname: '',
 			distance: '',
-			vehicleForInvasion: '',
 			animated: false,
 			index: -1,
 		}))
 	);
 
 	const [finalData, setFinalData]=useState({
+			token: '',
 			planet_names: [],
 			vehicle_names: [],
 	})
 
-	const { token, vehicleData } = planetCfg;
 	useEffect(() => {
 		if (token.length > 0) {
 			const updatedVehData = vehicleData.map((vehicleData, idx) => ({
@@ -64,6 +63,8 @@ const Approutes = () => {
 			}));
 			setPlanetCfg({ ...planetCfg, vehicleData: updatedVehData });
 			setFinalData({...finalData,token})
+
+			// SAVING DATA ON LOCALSTORAGE TO FETCH DATA DURING PAGE REFRESH.
 			localStorage.setItem('planetCfg', JSON.stringify(updatedVehData));
 			localStorage.setItem('token', token);
 
@@ -89,9 +90,10 @@ const Approutes = () => {
 						}}
 					>
 						<React.Fragment>
-							<aside className="starGridWrapper">
+							<section className="starGridWrapper">
 								<StarGrid />
-							</aside>
+							</section>
+
 							<Header />
 							<Route path={`/`} exact={true} strict component={LandingPage} />
 							<Route path={`/selectplanets`} exact={true} strict component={SelectPlanet} />
@@ -113,6 +115,5 @@ const Approutes = () => {
 	);
 };
 
-Approutes.propTypes = {};
 
 export default Approutes;

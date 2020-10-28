@@ -20,7 +20,7 @@ import { useFetchDataFromBackend } from '../customHooks/useFetchDataFromBackend'
 import { PlanetDetailsContext } from '../context/appContext';
 import { useHistory } from 'react-router';
 import { createPlanetCordToDisplay } from '../common/util.js';
-import { PlanetImageArr, Images } from '../customHooks/useDefineConstants';
+import { PlanetImageArr, MinijetImage } from '../customHooks/useDefineConstants';
 
 const SelectPlanet = () => {
 	const { planetCfg, setPlanetCfg, selectedPlanet, setSelectedPlanet, setSelecPlanetCount } = useContext(
@@ -28,8 +28,7 @@ const SelectPlanet = () => {
 	);
 	const history = useHistory();
 	useFetchDataFromBackend(planetCfg, setPlanetCfg);
-	const { Minijet } = Images;
-
+	const { Minijet } = MinijetImage;
 	const { planetData } = planetCfg;
 	const [count, setCount] = useState(0);
 	const [updatedPlanetData, setUpdatedPlanetData] = useState([]);
@@ -50,34 +49,34 @@ const SelectPlanet = () => {
 
 	const updateSelecPlanetData = () => {
 		if (planetindex > -1 && count <= 4) {
-			const _ = selectedPlanet.map((_, idx) => {
+			const updatedSelectedPlanet = selectedPlanet.map((planetData, idx) => {
 				if (idx === count - 1) {
 					return {
 						animated: true,
-						imgname: imgname,
+						imgname,
 						index: count - 1,
 						planetname,
 						distance,
 					};
-				} else if (_.animated && idx !== count - 1) {
+				} else if (planetData.animated && idx !== count - 1) {
 					return {
 						animated: false,
-						imgname: _.imgname,
-						index: _.index,
-						planetname: _.planetname,
-						distance: _.distance,
+						imgname: planetData.imgname,
+						index: planetData.index,
+						planetname: planetData.planetname,
+						distance: planetData.distance,
 					};
 				} else {
 					return {
 						animated: false,
-						imgname: _.imgname,
-						index: _.index,
-						planetname: _.planetname,
-						distance: _.distance,
+						imgname: planetData.imgname,
+						index: planetData.index,
+						planetname: planetData.planetname,
+						distance: planetData.distance,
 					};
 				}
 			});
-			setSelectedPlanet(_);
+			setSelectedPlanet(updatedSelectedPlanet);
 		} else {
 			setSelectedPlanet([]);
 			setCount(0);
@@ -86,7 +85,7 @@ const SelectPlanet = () => {
 	};
 
 	useEffect(() => {
-		updateSelecPlanetData();
+		planetindex > -1 && updateSelecPlanetData();
 	}, [planetindex]);
 
 	useEffect(() => {

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, ButtonText, AnimatedMiniJet } from '../common/StyledComponent';
 import { useHistory } from 'react-router';
 import { useSpring, config } from 'react-spring';
-import { Images } from '../../customHooks/useDefineConstants';
+import { MinijetImage } from '../../customHooks/useDefineConstants';
 
 export const CustomButton = (props) => {
 	const { redirectPath, leftpos, TextForButton, width, disabled } = props;
@@ -11,7 +11,7 @@ export const CustomButton = (props) => {
 	const unAnimateJet = () => setIshover(false);
 	const changePageOnClick = () => !disabled && history.push(`${redirectPath}`);
 	const history = useHistory();
-	const { Minijet } = Images;
+	const { Minijet } = MinijetImage;
 
 	const jetAnimatedProp = useSpring({
 		transform: isHover ? 'translateX(6vw)' : 'translateX(-30vw)',

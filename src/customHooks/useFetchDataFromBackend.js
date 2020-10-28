@@ -2,8 +2,8 @@ import axios from 'axios';
 import { TokenUrl, PlanetUrl, VehicleUrl } from '../common/myenv';
 
 export const useFetchDataFromBackend = async (planetCfg, setPlanetCfg) => {
-	const { token, apiError, planetData, vehicleData } = planetCfg;
-	if (token.length === 0 && apiError.length === 0 && planetData.length === 0 && vehicleData.length === 0) {
+	const { token, planetData, vehicleData } = planetCfg;
+	if (token.length === 0  && planetData.length === 0 && vehicleData.length === 0) {
 		try {
 			const planetApiResponse = await axios(PlanetUrl, {
 				method: 'GET',

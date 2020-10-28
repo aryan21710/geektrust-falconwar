@@ -6,11 +6,6 @@ export const usePostDataToFetchResult = async (finalData, setBackendResponse, ba
 		try {
 			const finalResult = await axios(FindFalconeUrl, {
                 method: 'POST',
-                mode: 'cors',
-				cache: 'no-cache',
-                credentials: 'same-origin',
-                redirect: 'follow',
-				referrerPolicy: 'no-referrer',
 				body: finalData,
 				headers: {
 					"Accept": "application/json",

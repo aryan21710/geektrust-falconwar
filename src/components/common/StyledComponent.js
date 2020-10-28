@@ -249,7 +249,7 @@ const animateSelectedPlanet = keyframes`
 export const UnAnimatedWrapper = styled.div`
 	display: flex;
 	justify-content: space-around;
-	height: 30vh;
+	height: 25vh;
 	width: 100%;
 	flex: 1;
 	position: absolute;

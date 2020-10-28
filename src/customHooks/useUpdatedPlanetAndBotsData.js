@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 export const useUpdatedPlanetAndBotsData = (selecPlanetCnt, selectedPlanet, setSelectedPlanet) => {
 	useEffect(() => {
