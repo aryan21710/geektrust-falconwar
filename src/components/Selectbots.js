@@ -27,17 +27,24 @@ const SelectBots = () => {
 	const populatePlanetAndBotsData = () => {
 		const filteredArrOfSelectedPlanet =
 			selectedPlanet.length === 6 ? JSON.parse(localStorage.getItem('selectedPlanet')) : selectedPlanet;
-		return filteredArrOfSelectedPlanet.map((data, idx) => ({
+		const mydata = filteredArrOfSelectedPlanet.map((data, idx) => ({
 			...data,
-			vehicleNamesArray: JSON.parse(localStorage.getItem('planetCfg')).map((data) => ({
-				name: data.name,
-				imgName: data.imgName,
-				distance: data.distance,
-				speed: data.speed,
-				travelTime: 0,
-				totalUnits: data.totalUnits,
-			})),
+			vehicleNamesArray: JSON.parse(localStorage.getItem('planetCfg')).reduce((acc, data) => {
+				return {
+					...acc,
+					[data.name]: {
+						name: data.name,
+						imgName: 'data.imgName',
+						distance: data.distance,
+						speed: data.speed,
+						travelTime: 0,
+						totalUnits: data.totalUnits,
+					},
+				};
+			}, {}),
 		}));
+		console.log(`mydata ${JSON.stringify(mydata, null, 4)}`);
+		return mydata;
 	};
 
 	useEffect(() => {
@@ -49,73 +56,86 @@ const SelectBots = () => {
 	}, [selectedVehicle, dropDownIndex]);
 
 	const calcTimeTravelAndBotsLeft = (planetAndBotsData) => {
+		let temp={};
 		const updatedPlanetAndBotsData = planetAndBotsData
 			.map((overallData, idx) => {
-				if (idx === dropDownIndex) {
-					const { vehicleNamesArray } = overallData;
-					const vehicleIndex = vehicleNamesArray.findIndex(
-						(vehicleData) => vehicleData.name === selectedVehicle
-					);
-					let sortedBotsAndPlanetData = vehicleNamesArray.splice(vehicleIndex, 1);
-					sortedBotsAndPlanetData = sortedBotsAndPlanetData.concat(vehicleNamesArray);
-					return { ...overallData, vehicleNamesArray: sortedBotsAndPlanetData };
-				} else {
-					return { ...overallData };
-				}
-			}).map((overallData, idx) => {
 				const { vehicleNamesArray } = overallData;
 				const distanceToPlanet = parseInt(overallData.distance);
 				if (idx === dropDownIndex) {
-					const temp = vehicleNamesArray.map((vehicleData, idx) => {
-						if (vehicleData.name === selectedVehicle) {
-							if (distanceToPlanet > vehicleData.distance) {
+					for (let vehicleData in vehicleNamesArray) {
+						if (vehicleNamesArray[vehicleData] === selectedVehicle) {
+							if (distanceToPlanet > vehicleNamesArray[vehicleData].distance) {
 								alert(
-									`OOPS!! YOU CANNOT TRAVEL TO ${overallData.planetname} USING ${vehicleData.name}`
+									`OOPS!! YOU CANNOT TRAVEL TO ${overallData.planetname} USING ${vehicleNamesArray[vehicleData]}`
 								);
-								return { ...vehicleData };
+								temp[selectedVehicle]= { ...vehicleNamesArray[vehicleData] };
 							} else {
-								if (vehicleData.totalUnits === 0) {
+								if (vehicleNamesArray[vehicleData].totalUnits === 0) {
 									alert(
-										`OOPS!! YOU RAN OUT OF ${vehicleData.name}. PLEASE USE SOME OTHER BOT FOR INVASION.`
+										`OOPS!! YOU RAN OUT OF ${vehicleNamesArray[vehicleData]}. PLEASE USE SOME OTHER BOT FOR INVASION.`
 									);
-									return {...vehicleData}
+									temp[selectedVehicle]= { ...vehicleNamesArray[vehicleData] };
 								} else {
-									return {
-										...vehicleData,
-										travelTime: Math.round(distanceToPlanet / parseInt(vehicleData.speed)),
+									temp[selectedVehicle]= {
+										...vehicleNamesArray[vehicleData],
+										travelTime: Math.round(distanceToPlanet / parseInt(vehicleNamesArray[vehicleData].speed)),
 									};
 								}
 							}
 						} else {
-							return { ...vehicleData };
+							temp[selectedVehicle]= { ...vehicleNamesArray[vehicleData] };
 						}
-					});
+					};
 					return { ...overallData, vehicleNamesArray: temp };
 				} else {
 					return {
 						...overallData,
 					};
 				}
-			}).map((overallData, idx) => {
-				const { vehicleNamesArray } = overallData;
-				return {...overallData, vehicleNamesArray: vehicleNamesArray.map((vehicleData) => {
-					return {
-						...vehicleData,
-						totalUnits: vehicleData.name === selectedVehicle && vehicleData.totalUnits > 0
-						? vehicleData.totalUnits - 1
-						: vehicleData.totalUnits
-					}
-				})}
+				return temp
 			})
+			// .map((overallData, idx) => {
+			// 	const { vehicleNamesArray } = overallData;
+			// 	return {
+			// 		...overallData,
+			// 		vehicleNamesArray: Object.keys(vehicleNamesArray).map((vehicleData) => {
+			// 			return {
+			// 				...vehicleNamesArray[vehicleData],
+			// 				totalUnits:
+			// 					vehicleNamesArray[vehicleData].name === selectedVehicle && vehicleNamesArray[vehicleData].totalUnits > 0
+			// 						? vehicleNamesArray[vehicleData].totalUnits - 1
+			// 						: vehicleNamesArray[vehicleData].totalUnits,
+			// 			};
+			// 		}),
+			// 	};
+			// });
 		console.log(`updatedPlanetAndBotsData ${JSON.stringify(updatedPlanetAndBotsData, null, 4)}`);
 		setPlanetAndBotsData(updatedPlanetAndBotsData);
 	};
+
+
+	const test=(vehicleNamesArray)=>{
+		for (let i in vehicleNamesArray) {
+			console.log(`test ${vehicleNamesArray[i].name} ::: ${selectedVehicle}`)
+			if (vehicleNamesArray[i].name === selectedVehicle) {
+				console.log(`test ${vehicleNamesArray[i].imgName}`)
+				return i
+			};
+		}
+	}
 
 	const onSelectedVehicleIdx = (e) => {
 		e.preventDefault();
 		const dropDownSelIndex = parseInt(e.target.options[e.target.selectedIndex].dataset.index);
 		setDropDownIndex(dropDownSelIndex);
 		setSelectedVehicle(e.target.value);
+	};
+
+	const hasBotTravelled = (vehicleNamesArray) => {
+		for (let i in vehicleNamesArray) {
+			if (vehicleNamesArray[i].travelTime === 0) return true;
+			return false;
+		}
 	};
 
 	return (
@@ -133,18 +153,18 @@ const SelectBots = () => {
 							</Heading>
 							<Heading color="#FAD107" fontSize="1rem">{`DISTANCE ${distance} megamiles`}</Heading>
 							<Select name="planetName" onChange={onSelectedVehicleIdx}>
-								{dropDownIndex !== idx && vehicleNamesArray[0].travelTime === 0 && (
+								{dropDownIndex !== idx && hasBotTravelled(vehicleNamesArray) && (
 									<option key={uuid()} defaultValue="Choose A Space Vehicle">
 										Choose A Space Vehicle
 									</option>
 								)}
-								{vehicleNamesArray.map((bot) => (
-									<option key={uuid()} data-index={idx} value={bot.name}>
-										{bot.name}
+								{Object.keys(vehicleNamesArray).map((bot) => (
+									<option key={uuid()} data-index={idx} value={vehicleNamesArray[bot].name}>
+										{vehicleNamesArray[bot].name}
 									</option>
 								))}
 							</Select>
-							{vehicleNamesArray[0].travelTime > 0 && (
+							{!hasBotTravelled(vehicleNamesArray) && (
 								<React.Fragment>
 									<ImageWrapper
 										rotateBy="25deg"
@@ -153,12 +173,14 @@ const SelectBots = () => {
 										width="20vw"
 										height="20vh"
 										marginBottom="3vh"
-										src={vehicleNamesArray[0].imgName}
+										src={`${test(vehicleNamesArray).imgName}`}
 									/>
 									<Heading fontSize="1rem" color="#FAD107">
-										{`Time Taken:- ${vehicleNamesArray[0].travelTime}`}
+										{`Time Taken:- ${test(vehicleNamesArray)}`}
 									</Heading>
-						
+									<Heading fontSize="1rem" color="#FAD107">
+										{`${vehicleNamesArray.selectedVehicle} UNITS LEFT:- ${vehicleNamesArray.selectedVehicle.totalUnits}`}
+									</Heading>
 								</React.Fragment>
 							)}
 						</BadgeWrapper>
