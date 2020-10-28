@@ -17,7 +17,6 @@ const SelectBots = () => {
 	const { selectedPlanet } = useContext(PlanetDetailsContext);
 	const [dropDownIndex, setDropDownIndex] = useState(-1);
 	const [selectedVehicle, setSelectedVehicle] = useState('');
-	const [error, setError] = useState('');
 	const [planetAndBotsData, setPlanetAndBotsData] = useState([]);
 
 	useEffect(() => {
@@ -49,6 +48,7 @@ const SelectBots = () => {
 	}, [selectedVehicle, dropDownIndex]);
 
 	const calcTimeTravelAndBotsLeft = (planetAndBotsData) => {
+		let error=false;
 		const updatedPlanetAndBotsData = planetAndBotsData
 			.map((overallData, idx) => {
 				if (idx === dropDownIndex) {
@@ -72,9 +72,11 @@ const SelectBots = () => {
 								alert(
 									`OOPS!! YOU CANNOT TRAVEL TO ${overallData.planetname} USING ${vehicleData.name}`
 								);
+								error=true;
 								return { ...vehicleData };
 							} else {
 								if (vehicleData.totalUnits === 0) {
+									error=true;
 									alert(
 										`OOPS!! YOU RAN OUT OF ${vehicleData.name}. PLEASE USE SOME OTHER BOT FOR INVASION.`
 									);
@@ -96,18 +98,17 @@ const SelectBots = () => {
 						...overallData,
 					};
 				}
-			}).map((overallData, idx) => {
+			}).map((overallData) => {
 				const { vehicleNamesArray } = overallData;
 				return {...overallData, vehicleNamesArray: vehicleNamesArray.map((vehicleData) => {
 					return {
 						...vehicleData,
-						totalUnits: vehicleData.name === selectedVehicle && vehicleData.totalUnits > 0
+						totalUnits: vehicleData.name === selectedVehicle && vehicleData.totalUnits > 0 && !error
 						? vehicleData.totalUnits - 1
 						: vehicleData.totalUnits
 					}
 				})}
 			})
-		console.log(`updatedPlanetAndBotsData ${JSON.stringify(updatedPlanetAndBotsData, null, 4)}`);
 		setPlanetAndBotsData(updatedPlanetAndBotsData);
 	};
 
