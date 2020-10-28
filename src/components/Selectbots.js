@@ -25,7 +25,9 @@ const SelectBots = () => {
 
 	const populatePlanetAndBotsData = () => {
 		const filteredArrOfSelectedPlanet =
-			selectedPlanet.length === 6 ? JSON.parse(localStorage.getItem('selectedPlanet')) : selectedPlanet;
+			selectedPlanet.length === 6 ? 
+			JSON.parse(localStorage.getItem('selectedPlanet')) 
+			: selectedPlanet;
 		return filteredArrOfSelectedPlanet.map((data) => ({
 			...data,
 			vehicleDataArray: JSON.parse(localStorage.getItem('planetCfg')).map((data) => ({
@@ -66,7 +68,7 @@ const SelectBots = () => {
 				const { vehicleDataArray } = planetData;
 				const distanceToPlanet = parseInt(planetData.distance);
 				if (idx === selectedPlanetIndex) {
-					const temp = vehicleDataArray.map((vehicleData, idx) => {
+					const temp = vehicleDataArray.map((vehicleData) => {
 						if (vehicleData.name === selectedVehicle) {
 							if (distanceToPlanet > vehicleData.distance) {
 								alert(
