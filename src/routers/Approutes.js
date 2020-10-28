@@ -11,7 +11,7 @@ const LandingPage = lazy(() => import('../components/LandingPage'));
 const Header = lazy(() => import('../components/common/Header'));
 const Footer = lazy(() => import('../components/common/Footer'));
 const SelectPlanet = lazy(() => import('../components/SelectPlanet'));
-const SelectBots = lazy(() => import('../components/SelectBots'));
+const SelectBots = lazy(() => import('../components/Selectbots'));
 const DisplayAllSpaceVehicles = lazy(() => import('../components/DisplayAllSpaceVehicles'));
 
 class DebugRouter extends Router {

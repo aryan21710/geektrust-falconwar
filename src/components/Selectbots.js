@@ -140,7 +140,7 @@ const SelectBots = () => {
 								)}
 								{vehicleNamesArray.map((bot) => (
 									<option key={uuid()} data-index={idx} value={bot.name}>
-										{bot.name}
+										{`${bot.name} (${bot.totalUnits})`} 
 									</option>
 								))}
 							</Select>
