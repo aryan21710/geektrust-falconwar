@@ -47,7 +47,6 @@ export const Heading = styled.h1`
 
 export const BadgeWrapper = styled.div`
 	display: flex;
-	justify-content: center;
 	align-items: center;
 	justify-content: ${(props) => props.justifyContent || 'center'};
 	flex-direction: ${(props) => props.flexDirection || 'row'};
@@ -55,11 +54,29 @@ export const BadgeWrapper = styled.div`
 	width: ${(props) => props.width || '25vw'};
 	flex: ${(props) => props.flex || '1'};
 	z-index: 2;
+	border: 2px solid white;
 	@media (max-width: 768px) {
 		width: 100vw;
 		height: 30vh;
 	}
 `;
+
+
+export const TestWrapper=styled.div`
+    display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	height: 35vh;
+	width: 25vw;
+	z-index: 2;
+	border: 2px solid white;
+	@media (max-width: 768px) {
+		width: 100vw;
+		height: 30vh;
+	}
+`
+
 
 export const ButtonWrapper = styled.div`
 	width: 100vw;
