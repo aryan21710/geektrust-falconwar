@@ -30,10 +30,11 @@ class DebugRouter extends Router {
 const Approutes = () => {
 	const [planetCfg, setPlanetCfg] = useState({
 		token: '',
+		apiError: '',
 		planetData: [],
 		vehicleData: [],
 	});
-	const { token, vehicleData } = planetCfg;
+	const { apiError, token, vehicleData } = planetCfg;
 
 	const [selecPlanetCnt, setSelecPlanetCount] = useState(0);
 	const [selectedPlanet, setSelectedPlanet] = useState(() =>
@@ -41,7 +42,7 @@ const Approutes = () => {
 			imgname: planetImg,
 			planetname: '',
 			distance: '',
-			animated: false,
+			isAnimated: false,
 			index: -1,
 		}))
 	);
@@ -70,6 +71,10 @@ const Approutes = () => {
 
 		}
 	}, [token]);
+
+	useEffect(()=>{
+		apiError.length > 0 && alert(apiError);
+	},[apiError])
 
 	useUpdatedPlanetAndBotsData(selecPlanetCnt, selectedPlanet, setSelectedPlanet);
 

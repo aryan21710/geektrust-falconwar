@@ -30,10 +30,10 @@ const SelectPlanet = () => {
 	useFetchDataFromBackend(planetCfg, setPlanetCfg);
 	const { Minijet } = MinijetImage;
 	const { planetData } = planetCfg;
-	const [count, setCount] = useState(0);
+	const [animPlanetCnt, setAnimPlanetCnt] = useState(0);
 	const [updatedPlanetData, setUpdatedPlanetData] = useState([]);
 	const jetAnimatedProp = useSpring({
-		transform: count === 4 ? 'translateX(104vw)' : 'translateX(0vw)',
+		transform: animPlanetCnt === 4 ? 'translateX(104vw)' : 'translateX(0vw)',
 		delay: 700,
 		config: { mass: 1, tension: 280, friction: 50 },
 	});
@@ -47,20 +47,20 @@ const SelectPlanet = () => {
 	const [planetname, setPlanetName] = useState('');
 	const [distance, setDistance] = useState(0);
 
-	const updateSelecPlanetData = () => {
-		if (planetindex > -1 && count <= 4) {
+	const updateSelectedPlanetDataForAnim = () => {
+		if (planetindex > -1 && animPlanetCnt <= 4) {
 			const updatedSelectedPlanet = selectedPlanet.map((planetData, idx) => {
-				if (idx === count - 1) {
+				if (idx === animPlanetCnt - 1) {
 					return {
-						animated: true,
+						isAnimated: true,
 						imgname,
-						index: count - 1,
+						index: animPlanetCnt - 1,
 						planetname,
 						distance,
 					};
-				} else if (planetData.animated && idx !== count - 1) {
+				} else if (planetData.isAnimated && idx !== animPlanetCnt - 1) {
 					return {
-						animated: false,
+						isAnimated: false,
 						imgname: planetData.imgname,
 						index: planetData.index,
 						planetname: planetData.planetname,
@@ -68,7 +68,7 @@ const SelectPlanet = () => {
 					};
 				} else {
 					return {
-						animated: false,
+						isAnimated: false,
 						imgname: planetData.imgname,
 						index: planetData.index,
 						planetname: planetData.planetname,
@@ -79,17 +79,17 @@ const SelectPlanet = () => {
 			setSelectedPlanet(updatedSelectedPlanet);
 		} else {
 			setSelectedPlanet([]);
-			setCount(0);
+			setAnimPlanetCnt(0);
 			setSelecPlanetCount(0);
 		}
 	};
 
 	useEffect(() => {
-		planetindex > -1 && updateSelecPlanetData();
+		planetindex > -1 && updateSelectedPlanetDataForAnim();
 	}, [planetindex]);
 
 	useEffect(() => {
-		if (count === 0) {
+		if (animPlanetCnt === 0) {
 			setPlanetIndex('');
 			setImgname('');
 			setDistance('');
@@ -98,17 +98,17 @@ const SelectPlanet = () => {
 				Array(6)
 					.fill('')
 					.map(() => ({
-						animated: false,
+						isAnimated: false,
 						imgname: '',
 						index: -1,
 						planetname: '',
 						distance: '',
 					}))
 			);
-		} else if (count === 4) {
-			setSelecPlanetCount(count);
+		} else if (animPlanetCnt === 4) {
+			setSelecPlanetCount(animPlanetCnt);
 		}
-	}, [count]);
+	}, [animPlanetCnt]);
 
 	const isPlanetAlreadySelected = (planetname) =>
 		selectedPlanet.some((planetData) => planetData.planetname === planetname);
@@ -118,16 +118,13 @@ const SelectPlanet = () => {
 		if (isPlanetAlreadySelected(planetname)) {
 			alert('PLANET ALREADY SELECTED.. PLEASE SELECT SOME OTHER PLANET');
 		} else {
-			setCount(count + 1);
+			setAnimPlanetCnt(animPlanetCnt + 1);
 			setPlanetIndex(planetindex);
 			setImgname(imgname);
 			setDistance(distance);
 			setPlanetName(planetname);
 		}
 	};
-
-
-	const conditionForAnimation = (_) => _.index >= 0;
 
 	const moveToDisplayVehiclePage = () => history.push(`/displayallspacevehicles`);
 
@@ -165,36 +162,36 @@ const SelectPlanet = () => {
 				</SolarSystemWrapper>
 				<PlanetWrapper>
 					<SelectedPlanet>
-						{selectedPlanet.map((_, idx) => {
-							if (conditionForAnimation(_) && _.animated) {
+						{selectedPlanet.map((planet, idx) => {
+							if (planet.index >= 0 && planet.isAnimated) {
 								return (
 									<StaticWrapper key={uuid()} width={idx === 4 || idx === 5 ? '0vw' : '25vw'}>
 										<AnimatedWrapper>
 											<Heading fontSize="1.3rem">{`Selected Planet - ${idx + 1}`}</Heading>
-											<SelectedPlanetImg imgname={_.imgname} />
+											<SelectedPlanetImg imgname={planet.imgname} />
 											<Heading color="#FAD107" fontSize="1.2rem">
-												{_.planetname}
+												{planet.planetname}
 											</Heading>
 											<Heading
 												color="#FAD107"
 												fontSize="1rem"
-											>{`DISTANCE ${_.distance} megamiles`}</Heading>
+											>{`DISTANCE ${planet.distance} megamiles`}</Heading>
 										</AnimatedWrapper>
 									</StaticWrapper>
 								);
-							} else if (!_.animated && conditionForAnimation(_)) {
+							} else if (!planet.isAnimated && planet.index >= 0) {
 								return (
 									<StaticWrapper key={uuid()} width={idx === 4 || idx === 5 ? '0vw' : '25vw'}>
 										<UnAnimatedWrapper leftpos="0vw">
 											<Heading fontSize="1.3rem">{`Selected Planet - ${idx + 1}`}</Heading>
-											<SelectedPlanetImg imgname={_.imgname} />
+											<SelectedPlanetImg imgname={planet.imgname} />
 											<Heading color="#FAD107" fontSize="1.2rem">
-												{_.planetname}
+												{planet.planetname}
 											</Heading>
 											<Heading
 												color="#FAD107"
 												fontSize="1rem"
-											>{`DISTANCE ${_.distance} megamiles`}</Heading>
+											>{`DISTANCE ${planet.distance} megamiles`}</Heading>
 										</UnAnimatedWrapper>
 									</StaticWrapper>
 								);
@@ -203,14 +200,14 @@ const SelectPlanet = () => {
 									<StaticWrapper key={uuid()} width={idx === 4 || idx === 5 ? '0vw' : '25vw'}>
 										<UnAnimatedWrapper>
 											<Heading fontSize="1.3rem">{`Selected Planet - ${idx + 1}`}</Heading>
-											<SelectedPlanetImg imgname={_.imgname} />
+											<SelectedPlanetImg imgname={planet.imgname} />
 											<Heading color="#FAD107" fontSize="1.2rem">
-												{_.planetname}
+												{planet.planetname}
 											</Heading>
 											<Heading
 												color="#FAD107"
 												fontSize="1rem"
-											>{`DISTANCE ${_.distance} megamiles`}</Heading>
+											>{`DISTANCE ${planet.distance} megamiles`}</Heading>
 										</UnAnimatedWrapper>
 									</StaticWrapper>
 								);
