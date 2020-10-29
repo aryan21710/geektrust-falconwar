@@ -10,25 +10,26 @@ const DisplayFinalResult = () => {
     const [error, setError] = useState({});
     const [displayMessage, setDisplayMessage] = useState("");
 
-
-
-	usePostDataToFetchResult(finalData, setBackendResponse, backendResponse,setError,error);
+	usePostDataToFetchResult(finalData,setBackendResponse, backendResponse,setError,error);
 
 	useEffect(() => {
 		if (Object.keys(backendResponse).length > 0) {
-            const { status } = backendResponse;
-            status ? setDisplayMessage('PASSED') :  setDisplayMessage('FAILED')
+            const { status, planet_name } = backendResponse;
+            status ? setDisplayMessage(`CONGRATULATIONS . YOU FOUND AL FALCONE ON ${planet_name.toUpperCase()}.`) :  setDisplayMessage('MISSION FAILED.. KEEP LOOKING FOR AL FALCONE')
 			setStatus(status);
 		} else if (Object.keys(error).length > 0) {
-            setDisplayMessage(error.response.statusText)
+            error.response.status===400 && setDisplayMessage(`START THE MISSION ALL OVER AGAIN...`)
         }
-	}, [backendResponse,error]);
-
+        return ()=>{
+            localStorage.clear()
+        }
+    }, [backendResponse,error]);
+    
 	return (
 		<React.Fragment>
 			<SelectedPlanetWrapper>
 				<Heading color="#FAD107" fontSize="1.2rem" fontFamily="Avenir">
-					{displayMessage.length > 0 ? displayMessage : 'SOMETHING WRONG'}
+					{displayMessage.length > 0 && displayMessage}
 				</Heading>
 			</SelectedPlanetWrapper>
 		</React.Fragment>

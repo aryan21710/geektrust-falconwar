@@ -26,8 +26,7 @@ const SelectBots = () => {
 	}, []);
 
 	const populatePlanetAndBotsData = () => {
-		const filteredArrOfSelectedPlanet =
-			selectedPlanet.length === 6 ? JSON.parse(localStorage.getItem('selectedPlanet')) : selectedPlanet;
+		const filteredArrOfSelectedPlanet = JSON.parse(localStorage.getItem('selectedPlanet')) ;
 		return filteredArrOfSelectedPlanet.map((data) => ({
 			...data,
 			finalStatus: false,

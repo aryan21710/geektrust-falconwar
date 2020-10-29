@@ -47,11 +47,11 @@ const Approutes = () => {
 		}))
 	);
 
-	const [finalData, setFinalData]=useState({
-			token: '',
-			planet_names: [],
-			vehicle_names: [],
-	})
+	const [finalData, setFinalData] = useState({
+		token: '',
+		planet_names: [],
+		vehicle_names: [],
+	});
 
 	useEffect(() => {
 		if (token.length > 0) {
@@ -63,18 +63,17 @@ const Approutes = () => {
 				totalUnits: vehicleData.total_no,
 			}));
 			setPlanetCfg({ ...planetCfg, vehicleData: updatedVehData });
-			setFinalData({...finalData,token})
+			setFinalData({ ...finalData, token });
 
 			// SAVING DATA ON LOCALSTORAGE TO FETCH DATA DURING PAGE REFRESH.
 			localStorage.setItem('planetCfg', JSON.stringify(updatedVehData));
 			localStorage.setItem('token', token);
-
 		}
 	}, [token]);
 
-	useEffect(()=>{
+	useEffect(() => {
 		apiError.length > 0 && alert(apiError);
-	},[apiError])
+	}, [apiError]);
 
 	useUpdatedPlanetAndBotsData(selecPlanetCnt, selectedPlanet, setSelectedPlanet);
 
@@ -91,7 +90,7 @@ const Approutes = () => {
 							selecPlanetCnt,
 							setSelecPlanetCount,
 							finalData,
-							setFinalData
+							setFinalData,
 						}}
 					>
 						<React.Fragment>
@@ -119,6 +118,5 @@ const Approutes = () => {
 		</DebugRouter>
 	);
 };
-
 
 export default Approutes;
